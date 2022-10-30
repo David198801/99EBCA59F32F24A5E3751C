@@ -75,6 +75,10 @@ try:
     if len(values)>0:
         c.executemany(sql,values)
         conn.commit()
+        
+    c.execute("select count(1) from T_MD5 ")
+    print("总数:"+str(c.fetchone()[0]))
+    input("按任意键继续")
 except Exception as e:
     conn.rollback()
     print(e)
