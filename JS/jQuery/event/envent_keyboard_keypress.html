@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <h4>自动点击1次</h4>
+  <input type="text">
+  <p>次数：<span>0</span></p>
+  <script type="text/javascript">
+    $(function () {
+      i = 0
+      $("input").keypress(
+        function () {
+          $("span").text(i += 1)
+        })
+      $("input").keypress()
+    })
+  </script>
+</body>
+
+</html>

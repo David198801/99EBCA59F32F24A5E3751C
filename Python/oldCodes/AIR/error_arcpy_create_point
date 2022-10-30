@@ -1,0 +1,97 @@
+# coding:utf-8
+import os
+import xlrd
+import arcpy
+
+path = 'D:/air/avg/'
+arcpy.env.workspace = "D:/air/avg_shp"
+
+list_dir = os.listdir(path)
+
+book_stations = xlrd.open_workbook('D:/air/stations/stations.xls')
+sheet = book_stations.sheet_by_name("Sheet1")
+area = sheet.col_values(0, start_rowx=0, end_rowx=None)
+stationName = sheet.col_values(1, start_rowx=0, end_rowx=None)
+latitude = sheet.col_values(2, start_rowx=0, end_rowx=None)
+longitude = sheet.col_values(3, start_rowx=0, end_rowx=None)
+aaaaa=0
+for xls in list_dir:
+    book = xlrd.open_workbook(path + xls)
+    sheet = book.sheet_by_name("sheet")
+
+    arcpy.CreateFeatureclass_management(r"D:\air\avg_shp",xls[:-4], "POINT")
+    arcpy.AddField_management(xls[:-4]+'.shp','city','TEXT','30')
+    arcpy.AddField_management(xls[:-4]+'.shp', 'station', 'TEXT', '50')
+    arcpy.AddField_management(xls[:-4]+'.shp', 'latitude', 'FLOAT', 8)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'longitude', 'FLOAT', 8)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'AQI', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'PM2_5', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'O3', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'PM10', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'SO2', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'NO2', 'FLOAT', 4)
+    arcpy.AddField_management(xls[:-4]+'.shp', 'CO', 'FLOAT', 4)
+
+
+    for row_num in range(1, sheet.nrows):
+        if row_num <= 100:
+            start = 0
+            end = 199
+        elif row_num > 1394:
+            end = 1494
+            start = 1294
+        else:
+            start = row_num - 101
+            end = row_num + 99
+        # if row_num <= 150:
+        #     start = 0
+        #     end = 299
+        # elif row_num > 1344:
+        #     end = 1494
+        #     start = 1194
+        # else:
+        #     start = row_num - 151
+        #     end = row_num + 149
+
+        for rowS_num in range(start, end):
+            if (sheet.cell_value(row_num, 1) == stationName[rowS_num] and
+                        sheet.cell_value(row_num, 0) in area[rowS_num]):
+                point = arcpy.Point(latitude[rowS_num], longitude[rowS_num])
+                rows = arcpy.InsertCursor(xls[:-4]+'.shp')
+                row = rows.newRow()
+                # pointGeometryList = []
+                aaaaa += 1
+                pointGeometry = arcpy.PointGeometry(point)
+                # pointGeometryList.append(pointGeometry)
+                row.shape = pointGeometry
+                def recd(col):
+                    if sheet.cell_value(row_num, col):
+                        return sheet.cell_value(row_num, col)
+                print area[rowS_num]
+                row.city=area[rowS_num]
+                row.station=stationName[rowS_num]
+                row.latitude=latitude[rowS_num]
+                row.longitude=longitude[rowS_num]
+                row.AQI=recd(2)
+                row.PM2_5=recd(3)
+                row.O3=recd(4)
+                row.PM10=recd(5)
+                row.SO2=recd(6)
+                row.NO2=recd(7)
+                row.CO=recd(8)
+                rows.insertRow(row)
+
+    #             shp.record(city=area[rowS_num],
+    #                        station=stationName[rowS_num],
+    #                        latitude=latitude[rowS_num],
+    #                        longitude=longitude[rowS_num],
+    #                        AQI=sheet.cell_value(row_num, 2),
+    #                        PM2_5=sheet.cell_value(row_num, 3),
+    #                        O3=sheet.cell_value(row_num, 4),
+    #                        PM10=sheet.cell_value(row_num, 5),
+    #                        SO2=sheet.cell_value(row_num, 6),
+    #                        NO2=sheet.cell_value(row_num, 7),
+    #                        CO=sheet.cell_value(row_num, 8))
+    #
+    #
+    # shp.save('D:/air/avg_shp/' + xls[:-4])

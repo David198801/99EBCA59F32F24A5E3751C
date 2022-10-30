@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <p>窗口滚动<span>0</span>次</p>
+  <script type="text/javascript">
+    i = 0
+    $(function () {
+      $(window).scroll(function () {
+        $("span").text(i += 1)
+        if (i % 2 == 0) {
+          $("p").css("color", "yellow")
+        }
+        else {
+          $("p").css("color", "")
+        }
+      })
+    })
+  </script>
+
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="text/html; charset=utf-8" />
+  <title>编码转换</title>
+  <script type="text/javascript" src="iconv.js"></script>
+  <script type="text/javascript">
+    //单字节尝试逐一修复
+    function transSingle(str, original_code, read_code) {
+      var numArr = []
+      for (var i = 0, len = str.length; i < len; i++) {
+        var num = str[i].charCodeAt()
+        if (num < 128) { numArr[i] = num }
+        else {
+          numU = iconv.encode(str[i], read_code)
+          if (numU[0] == 63) { numArr[i] = str[i].charCodeAt() }
+          else { numArr[i] = numU[0] }
+        }
+
+      }
+      return iconv.decode(numArr, original_code)
+    }
+
+
+    function transMulti(str, original_code, read_code) {
+      return iconv.decode(iconv.encode(str, read_code), original_code)
+    }
+
+
+
+
+    function get_result(n) {
+      var code_byte = { "Shift_JIS": 2, "GBK": 2, "windows-1252": 1, "ISO-8859-1": 1, "EUC-KR": 2, "Big5": 2 ,"utf-8":2}
+
+      var codelist = ["Shift_JIS", "GBK","utf-8", "windows-1252", "ISO-8859-1", "EUC-KR", "Big5"]
+      code_byte = { "Shift_JIS": 2, "GBK": 2, "windows-1252": 1, "ISO-8859-1": 1, "EUC-KR": 2, "Big5": 2 }
+
+      var codelist;
+      if (n == 0) { codelist = common_code_list }
+      else { codelist = all_code_list }
+
+      var s = document.getElementById("inputarea").value
+      outputdiv_html = "<table width='100%' border='0' align='center' cellpadding='4' cellspacing='1'><tbody><tr align='center'><td width='15%'>" +
+        "<b>原编码</b></td><td width='15%'><b>错误的读取编码</b></td><td><b>恢复结果</b></td></tr>"
+      var counter = 1
+      for (var i = 0, len = codelist.length; i < len; i++) {
+        for (var j = 0; j < len; j++) {
+          if (i != j) {
+            var original_code = codelist[i]
+            var read_code = codelist[j]
+            var trans_id = original_code + '_' + read_code
+            new_element_html = "<tr align='center' bgcolor='#66CCFF'><td>original_code</td><td>read_code</td><td><textarea id='original_code_read_code' rows='5' cols='100'>output_textarea_value</textarea></td></tr>"
+            new_element_html = new_element_html.replace('original_code_read_code', trans_id)
+            new_element_html = new_element_html.replace('original_code', original_code).replace('read_code', read_code)
+            if (counter % 2 == 0) { new_element_html = new_element_html.replace('66CCFF', 'FFFFFF') }
+            counter++
+
+
+
+            var o
+            if (code_byte[read_code] == 1) { o = transSingle(s, original_code, read_code) }
+            else { o = transMulti(s, original_code, read_code) }
+
+            new_element_html = new_element_html.replace('output_textarea_value', o)
+
+            outputdiv_html += new_element_html
+
+          }
+        }
+      }
+      document.getElementById('outputdiv').innerHTML = outputdiv_html
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+  <div id='inputdiv'>
+    <textarea id="inputarea" rows="5" cols="100"
+      type="text">‚É‚Á‚¿‰¹ºH–[w‚Ó‚½‚È‚èƒI[ƒN‚Ì—íŽm‚Æƒhƒƒhƒ`‚¾‚­ƒhƒXƒPƒxŒð”öIx‘ÌŒ±”Å</textarea>
+    <button onclick="get_result(0);">转换</button><br>
+  </div>
+  <div id='outputdiv'></div>
+  </div>
+  </tbody>
+  </table>
+
+</body>
+
+</html>

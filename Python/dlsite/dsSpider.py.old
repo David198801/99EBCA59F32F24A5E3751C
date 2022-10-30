@@ -1,0 +1,93 @@
+#coding:utf8
+import re
+import requests
+from bs4 import BeautifulSoup
+
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
+# proxies = {
+#   "http": "http://127.0.0.1:1088",
+#   "https": "http://127.0.0.1:1088",
+# }
+
+wordList = [u"体験"]
+
+name = u"伊ヶ崎綾香"
+
+mode = 0 #0 关键词  1 固定链接
+
+filename = ""
+
+urlNAME = u"https://www.dlsite.com/maniax/fsr/=/language/jp/sex_category%5B0%5D/male/" \
+              u"work_category%5B0%5D/doujin/order%5B0%5D/dl_d/work_type%5B0%5D/SOU/work_t" \
+              u"ype_name%5B0%5D/音声/per_page/30"
+
+if mode == 0:
+    urlNAME = u"https://www.dlsite.com/maniax/fsr/=/language/jp/sex_category%5B0%5D/male/keyword/" + name
+
+
+
+
+# pageNAME = requests.post(urlNAME, proxies=proxies, headers=headers)
+pageNAME = requests.post(urlNAME, headers=headers)
+soupNAME = BeautifulSoup(pageNAME.text, features="lxml")
+
+idRex = re.compile("^https://www.dlsite.com/(maniax|pro)/work/=/product_id.*")
+allNumberList = soupNAME.find_all(name='td', class_="page_total")
+linkList = soupNAME.find_all(name='a', href=idRex, class_=False)
+
+allNumber = allNumberList[0].contents[0].string
+allRJ = []
+
+print urlNAME
+print len(linkList)
+for linkLable in linkList:
+    allRJ.append(linkLable["href"][-13:-5])
+
+
+otherPageList = soupNAME.find_all(name='td', class_="page_no")
+otherPageList = otherPageList[0].find_all(name='a')
+
+
+def OtherP(otherPageList):
+    for otherPageLabel in otherPageList[:-2]:
+        otherPageURL = otherPageLabel["href"]
+        # otherPage = requests.post(otherPageURL, proxies=proxies, headers=headers)
+        otherPage = requests.post(otherPageURL, headers=headers)
+        otherPageSoup = BeautifulSoup(otherPage.text, features="lxml")
+        otherLinkList = otherPageSoup.find_all(name='a',
+                                               href=idRex,
+                                               class_=False)
+        print otherPageURL
+        print len(otherLinkList)
+        for otherLinkLable in otherLinkList:
+            allRJ.append(otherLinkLable["href"][-13:-5])
+
+        if allNumber > 150 and otherPageLabel["data-value"] == "5":
+            for j in range(6,int(allNumber)/30+2):
+                lotPageURL = otherPageLabel["href"][:-1]+str(j)
+                # lotPage = requests.post(lotPageURL, proxies=proxies, headers=headers)
+                lotPage = requests.post(lotPageURL, headers=headers)
+                lotSoup = BeautifulSoup(lotPage.text, features="lxml")
+                lotPageList = lotSoup.find_all(name='a', href=idRex, class_=False)
+                print lotPageURL
+                print len(lotPageList)
+                for lotLinkLable in lotPageList:
+                    allRJ.append(lotLinkLable["href"][-13:-5])
+            break
+
+if otherPageList:
+    OtherP(otherPageList)
+
+
+if mode == 0:
+    with open(name + u"_RJ.txt", "w") as f:
+        for i in sorted(allRJ):
+            f.write(i + "\n")
+elif mode == 1:
+    with open(filename + u"_RJ.txt", "w") as f:
+        for i in allRJ:
+            f.write(i + "\n")
+
+
+print "all=" + allNumber
+print "get=" + str(len(allRJ))

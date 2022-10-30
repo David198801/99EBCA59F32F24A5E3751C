@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <button id="button1">选取h4后下一个p元素</button>
+  <button id="button2">选取h4之后所有p元素</button>
+  <p>p.1</p>
+  <h4>h4.1</h4>
+  <p>p.2</p>
+  <p>p.3</p>
+  <p>p.4</p>
+  <script>
+    $(function () {
+      $("#button1").click(function () {
+        //重置所有元素 
+        $("*").css("color", "");
+        //选取h4后下一个p元素
+        $("h4 + p").css("color", "red");
+      })
+      $("#button2").click(function () {
+        //重置所有元素 
+        $("*").css("color", "");
+        //选取h4之后所有p元素
+        $("h4 ~ p").css("color", "red");
+      })
+
+    })
+  </script>
+</body>
+
+</html>

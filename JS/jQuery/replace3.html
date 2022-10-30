@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#b01").click(function() {
+                htmlobj = $.ajax({
+                    url: "http://q6woe9qyt.bkt.clouddn.com/run1.html",
+                    async: false
+                });
+                $("#myDiv").html(htmlobj.responseText);
+            });
+        });
+    </script>
+    </head>
+
+    <body>
+
+        <div id="myDiv">
+            <h2>通过 AJAX 改变文本</h2>
+        </div>
+        <button id="b01" type="button">改变内容</button>
+
+    </body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <h2>h2标签1</h2>
+  <h2>h2标签2</h2>
+  <h2>h2标签3</h2>
+  <script>
+    $(function () {
+      $("h2:first").css("color", "#66ccff");
+      $("h2:last").css("color", "red");
+    })
+  </script>
+</body>
+
+</html>

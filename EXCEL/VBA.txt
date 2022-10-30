@@ -1,0 +1,7 @@
+选中当前工作表所有单元格：Rows().Select
+Range(Cells.Address).Select
+
+选中当前工作表已使用的行数：ActiveSheet.UsedRange.Rows().Select
+
+局部
+Range("A1").CurrentRegion.Select

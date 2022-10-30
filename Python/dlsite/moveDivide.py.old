@@ -1,0 +1,40 @@
+import os
+import shutil
+
+path = r"D:\linshi\haato"
+sizeLimit = 1 * 1024 * 1024 *1024 #GB
+#sizeLimit = 10  * 1024 *1024 #MB
+
+def getPathSize(path):
+    size = 0
+    if os.path.isfile(path):
+        size += os.path.getsize(path)
+    else:
+        for root, dirs, files in os.walk(path):
+            for f in files:
+                size += os.path.getsize(os.path.join(root, f))
+    return size
+
+l = os.listdir(path)
+dirNum = [0]
+
+def divedeFile(list):
+    dirNum[0] += 1
+    dirPath = os.path.join(path,str(dirNum[0]))
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
+    sizeSum = 0
+    length = len(list)
+    for i in range(length):
+        sizePath = getPathSize(os.path.join(path, list[i]))
+        sizeSum += sizePath
+        if i == length-1:
+            for j in list:
+                shutil.move(os.path.join(path,j),os.path.join(dirPath,j))
+        elif sizeSum > sizeLimit:
+            for j in list[:i]:
+                shutil.move(os.path.join(path,j),os.path.join(dirPath,j))
+            divedeFile(list[i:])
+            break
+
+divedeFile(l)

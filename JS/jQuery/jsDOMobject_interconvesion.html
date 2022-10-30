@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <p id="p1"></p>
+  <script type="text/javascript">
+    var $jqO = $("#p1");
+    console.log(
+      Object.prototype.toString.call(
+        $jqO
+      )
+    );
+    //(1) jQuery 对象是一个数组对象, 可以通过 [index] 的方法得到对应的 DOM对象.
+    console.log(
+      Object.prototype.toString.call(
+        $jqO[0]
+      )
+    );
+    //(2) 使用 jQuery 中的 get(index) 方法得到相应的 DOM 对象                        
+    console.log(
+      Object.prototype.toString.call(
+        $jqO.get(0)
+      )
+    );
+
+    console.log("----------------------------------");
+
+    var domO = document.getElementById("p1")
+    console.log(
+      Object.prototype.toString.call(
+        $(domO)
+      )
+    );
+  </script>
+</body>
+
+</html>

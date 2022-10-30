@@ -1,0 +1,33 @@
+# coding:utf-8
+import os
+import arcpy
+from arcpy.sa import *
+import multiprocessing
+
+path = "D:\\air\ZSJ_avg_shp\\"
+# arcpy.env.workspace = r'D:\air\zKrg'
+arcpy.env.extent = "111.053917 21.566528 116.219924 25.520297"
+list_dir = os.listdir(path)
+
+clip_features = r"D:\ArcGIS\ZhuSanJiao.shp"
+
+datas = {'1':['AQI','AQI'],'2':['PM2_5','P25'],'3':['O3','O3'], '4':['PM10','P10'],
+            '5':['SO2','SO2'], '6':['NO2','NO2'], '7':['CO','CO']}
+
+def krCl(d):
+    for shp in list_dir:
+        if shp[-3:] == 'shp':
+            ws = 'D:\\air\\zKrg\\' + datas[d][0]
+            outName = '\\ZKC' + shp[-10:-4] + datas[d][1]
+            outKrig = Kriging(path + shp, datas[d][0], KrigingModelOrdinary("CIRCULAR"), 0.00516618888)
+            arcpy.Clip_management(outKrig, "#", ws + outName, clip_features, "#", True)
+            print outName
+
+
+if __name__ == '__main__':
+    for i in datas:
+        p = multiprocessing.Process(target=krCl, args=(i))
+        p.start()
+
+
+'''输出文件夹/文件名称复杂（或使用GDB)会报错，故使用简单文件夹/文件名'''

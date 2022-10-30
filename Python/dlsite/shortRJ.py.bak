@@ -1,0 +1,16 @@
+#coding:utf-8
+import os
+
+path = u"G:/音声/伊ヶ崎綾香/"
+fileList = os.listdir(path)
+# for file in fileList:
+#     if file[:2]=="RJ":
+#         if file[-2:] == "7z":
+#             os.rename(path + file, path + file[:8] + file[-3:])
+#         else:
+#             os.rename(path + file,path + file[:8] + file[-4:])
+for file in fileList:
+    if file[:2]=="RJ":
+        oldPath = path + file
+        newPath = path + file[:8]
+        os.rename(oldPath,newPath)

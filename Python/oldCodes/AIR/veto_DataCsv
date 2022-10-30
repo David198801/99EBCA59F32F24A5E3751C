@@ -1,0 +1,54 @@
+#coding:utf-8
+import csv
+import openpyxl
+
+import os
+
+workPath = "D:/air/"
+
+
+def writeXLS(file):
+    with open(workPath + file) as csvFile:
+        rows = csv.reader(csvFile)
+        next(rows)
+
+        book = openpyxl.Workbook(write_only=True)
+        sheet = book.create_sheet()
+        sheet.append(['updatetime','AreaName','jczname','AQI','PM2_5','O3','PM10','SO2','NO2','CO'])
+
+        row_xls = 0
+        for row in rows:
+            row_xls += 1
+            row_list = []
+
+            for col_xls in range(10):
+                data = row[col_xls]
+                if col_xls == 0:
+                    row_list.append(data)
+                elif r"\xa1\xaa" in repr(data) or len(data) == 0 or "-" in data:
+                    row_list.append('')
+                else:
+                    if col_xls == 1 or col_xls == 2:
+                        row_list.append(data.decode('gbk'))
+                    else:
+                        row_list.append(float(data))
+            print file,row_xls
+            if len(row_list)!= 10:
+                print "error"
+                exit()
+            sheet.append(row_list)
+
+
+
+
+
+            # if row_xls  == 1000:
+            #     book.save(workPath + "mon_xlsx/" + file[:-4] + ".xlsx")
+            #     break
+        book.save(workPath + "mon_xlsx/" + file[:-4] + ".xlsx")
+
+
+list_dir = os.listdir(workPath)
+for file in list_dir:
+    if file[-3:] == 'csv':
+        writeXLS(file)

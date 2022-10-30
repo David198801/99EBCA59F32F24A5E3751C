@@ -1,0 +1,41 @@
+# coding:utf-8
+import os
+import subprocess
+
+path = r"G:\Video\Porn\樱由罗"
+outPath = r"G:\Video\Porn\樱由罗sc"
+sizelimit = 2048 #MB
+
+
+def getDirSize(path):
+    size = 0
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            size += os.path.getsize(os.path.join(root, f))
+    return size
+
+def getDirPathAndSize(path):
+    p = {}
+    for root, dirs, files in os.walk(path):
+        for d in dirs:
+            if root == path:
+                s = getDirSize(os.path.join(root,d))
+                p[d] = s
+                print(d,s)
+    return p
+
+# os.chdir(path)
+
+pDict = getDirPathAndSize(path)
+
+
+for d in pDict:
+    sizeMB = pDict[d]/1000/1000
+    newDir = os.path.join(outPath, d)
+    os.makedirs(newDir)
+    cmd = r"E:\winrar\rar.exe " + r'''a "''' + os.path.join(outPath, d ,d) +\
+          '''" "''' + os.path.join(path, d) + r'''" -hp"anycon" -rr10p -ep1''' + '''"''' + path + '''"'''
+    if sizeMB > sizelimit:
+        cmd = cmd + " -v" + str(sizelimit) + "m"
+    print(cmd)
+    os.system(cmd)

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <p>窗口改变<span>0</span>次</p>
+  <script type="text/javascript">
+    i = 0
+    $(function () {
+      $(window).resize(function () {
+        $("span").text(i += 1)
+      })
+    })
+  </script>
+</body>
+
+</html>

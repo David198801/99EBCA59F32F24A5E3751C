@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <p id="p1">鼠标进入区域显示</p>
+  <br><br><br>
+  <p id="p2">ppppppppppp2</p>
+  <br><br><br>
+  <p id="p3">ppppppppppp3</p>
+  <script type="text/javascript">
+    $(function () {
+      $("#p1").hover(
+        function () {
+          $(this).css("background-color", "yellow")
+        },
+        function () {
+          $(this).css("background-color", "blue")
+        }
+      )
+    })
+  </script>
+</body>
+
+</html>
