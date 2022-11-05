@@ -2,12 +2,15 @@ import os
 import shutil
 import subprocess
 
+workPath = r""
 rarPath = r"C:\Program Files\WinRAR\rar"
 imgPackageName = "图片"
 
 imgExts = ('dwg','xcf','jpg','jpeg','jpx','png','dwg','apng','gif','webp','cr2','tif','bmp','jxr','psd','ico','heic')
 
 def packageImg(path):
+    if os.path.isfile(path):
+        return
     l = os.listdir(path)
     moveList = []
     for i in l:
@@ -32,10 +35,15 @@ def checkOrMakeDir(path):
         os.makedirs(path)
 
 def main():
-    with open("packageImg.txt","r",encoding='utf8') as txt:
-        l = [x.replace("\n","") for x in txt.readlines()]
+    if workPath:
+        l = os.listdir(workPath)
         for i in l:
-            packageImg(i)
+                packageImg(i)
+    else:
+        with open("packageImg.txt","r",encoding='utf8') as txt:
+            l = [x.replace("\n","") for x in txt.readlines()]
+            for i in l:
+                packageImg(i)
 
 main()
 
