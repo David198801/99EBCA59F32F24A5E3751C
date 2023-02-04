@@ -4,8 +4,9 @@ import subprocess
 import re
 
 musicPath = r"D:\music"
+qaacPath = r"D:\P\qaac2.71\qaac64\qaac64.exe"
 outFormat = "m4a"
-setBitrate = '320k'
+setBitrate = '256k'
 
 
 otherArgsList = []
@@ -79,10 +80,10 @@ for root,dirs,files in os.walk(flacDirPath):
         arMark9 = False
         if sampleRate == '88200':
             otherArgsList += ['-ar','44100']
-            arMark = True
+            arMark8 = True
         elif sampleRate == '96000':
             otherArgsList += ['-ar','48000']
-            arMark = True
+            arMark9 = True
         
         if fileExt == outFormat:
             bitrate = getBitrate(ffmpegOut)
@@ -110,7 +111,7 @@ for root,dirs,files in os.walk(flacDirPath):
         
         
         m4aTempPath = os.path.join(outDirPath,"m4atemp.m4a")
-        qaacCmdList = ["D:\Program Files\Foobar2000\encoders\qaac64.exe",
+        qaacCmdList = [qaacPath,
                         wavPath,'--ignorelength','--threading','-c',outBitrate[:-1],'-o',m4aTempPath]
         subprocess.call(qaacCmdList)
                         
