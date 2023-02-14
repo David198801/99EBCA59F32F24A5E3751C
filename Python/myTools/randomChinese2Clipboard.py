@@ -8,7 +8,7 @@ def set_text(string):
   win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, string)
   win32clipboard.CloseClipboard()
 
-txtPath = r"D:\Programming\工具\3500个常用汉字列表.txt"
+txtPath = r"../../others/3500个常用汉字列表.txt"
 
 n = 5
 
