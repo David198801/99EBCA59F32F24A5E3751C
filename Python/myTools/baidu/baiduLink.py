@@ -52,5 +52,6 @@ for root,dirs,files in os.walk(currentPath):
             fileLink = fileMD5.upper() + "#" + file256MD5.upper() + "#" + str(fileSize) + "#" + linkPath[1:]
             txt.write(fileLink)
             txt.write("\n")
+            txt.flush()
             print(linkPath)
 txt.close()
