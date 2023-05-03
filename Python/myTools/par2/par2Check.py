@@ -3,8 +3,8 @@ import subprocess
 import shutil
 import re
 
-inPath = r"H:\f"
-outPath = r"I:\p"
+inPath = r"e:\f"
+outPath = r"f:\p"
 
 
 par2jPath = "par2j"
@@ -15,6 +15,9 @@ for root,dirs,files in os.walk(inPath):
     for f in files:
         filePath = os.path.join(root,f)
         parPath = filePath.replace(inPath,outPath)+".par2"
+        if os.path.getsize(filePath)==0:#0字节文件跳过
+            print("[IGNORE] " + filePath)
+            continue
         if os.path.exists(parPath):
             comdList = [par2jPath,"v","/uo","/d"+root,parPath]
             p = subprocess.run(comdList, stdout=subprocess.PIPE)
