@@ -1,7 +1,7 @@
 import os
 
-path = r"e:\CD_2020.09.01"
-flacPath = 'd:/music/flac'
+path = r"G:\f\Collections2\音乐\music\CD"
+flacPath = r'G:\f\Collections2\音乐\music\flac'
 
 for i in os.listdir(path):
     albumPath = os.path.join(path,i)
@@ -20,7 +20,7 @@ for i in os.listdir(path):
                     print(txtPath)
                     m = False
                     m2 = True
-                print('[对不上flac文件]\n' + flac)
+                print('[对不上flac文件]' + flac)
         if m2:
             print()
             m2 = False

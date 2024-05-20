@@ -3,8 +3,8 @@ import subprocess
 import shutil
 import re
 
-inPath = r"H:\f"
-outPath = r"I:\p"
+inPath = r"f:\f"
+outPath = r"e:\p"
 
 
 par2jPath = "par2j"
@@ -51,6 +51,8 @@ for rootI,dirsI,filesI in inWalkList:
         filePathI = os.path.join(rootI,fileI)
         filePathO = filePathI.replace(inPath,outPath,1)
         par2Path = filePathO+".par2"
+        if os.path.getsize(filePathI)==0:#0字节文件跳过
+            continue
         if (not os.path.exists(par2Path)):
             buildPar2(par2Path,filePathI)
         else:
