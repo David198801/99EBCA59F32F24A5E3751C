@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="text/html; charset=utf-8" />
+  <title></title>
+
+  <script type="text/javascript">
+    function mengji2pandl(link) {
+      var l = link.toLowerCase().split("#")
+      var real = l[3] + "|" + l[2] + "|" + l[0] + "|" + l[1]
+      var b = btoa(unescape(encodeURIComponent(real)))
+      var pandl = "bdpan://" + b
+      return pandl;
+    }
+
+    function pandl2mengji(link) {
+      var p = link.replace("bdpan://", "")
+      var real = decodeURIComponent(escape(atob(p)))
+      var l = real.split("|")
+      var mengji = l[2].toUpperCase() + "#" + l[3].toUpperCase() + "#" + l[1].toUpperCase() + "#" + l[0]
+      return mengji
+    }
+
+    function m2pClick() {
+      var s = document.getElementById("m2pInput").value
+      document.getElementById("m2pResult").value = mengji2pandl(s)
+    }
+
+    function p2mClick() {
+      var s = document.getElementById("p2mInput").value
+      document.getElementById("p2mResult").value = pandl2mengji(s)
+    }
+  </script>
+  <style>
+    #m2pInput {
+      width: 70%;
+    }
+
+    #m2pResult {
+      width: 70%;
+    }
+
+    #p2mInput {
+      width: 70%;
+    }
+
+    #p2mResult {
+      width: 70%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <input id="m2pInput" rows="2" type="text"></textarea><br>
+    <button onclick="m2pClick();">梦姬转pandl</button><br>
+    <textarea id="m2pResult" rows="5" type="text"></textarea>
+  </div>
+  ----------------------------------------------------------------------------------------
+  <div>
+    <input id="p2mInput" rows="2" type="text"></textarea><br>
+    <button onclick="p2mClick();">pandl转梦姬</button><br>
+    <textarea id="p2mResult" rows="5" type="text"></textarea>
+  </div>
+
+</body>
+
+</html>

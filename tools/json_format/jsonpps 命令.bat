@@ -1,0 +1,1 @@
+java -jar jsonpps-1.1.jar input.json -o output.json

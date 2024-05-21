@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>下划线与驼峰相互转换工具类</title>
+		<style type="text/css">
+			#bodyBox {
+				width: auto 10%;
+				margin-top: 10px;
+			}
+			.textBox {
+				height: 100px;
+				width: 45%;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<h3>下划线与驼峰相互转换工具类</h3>
+		</div>
+		<div id="bodyBox">
+			下划线转驼峰<br>
+			<textarea autofocus="autofocus" class="textBox" id="toHumpId" onblur="tranToHump()"></textarea><br>
+			转换后:<br>
+			<textarea class="textBox" id="toHumpIdAfter"></textarea><br><br>
+			驼峰转下划线<br>
+			<textarea autofocus="autofocus" class="textBox" id="toLineId" onblur="tranToLine()"></textarea><br>
+			转换后:<br>
+			<textarea class="textBox" id="toLineIdAfter"></textarea><br>
+		</div>
+	</body>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/**
+		 * 失去焦点转换_下划线转换驼峰
+		 */
+		function tranToHump() {
+			$("#toHumpIdAfter").val(toHump($("#toHumpId").val().trim().toLocaleLowerCase()));
+		}
+ 
+		/**
+		 * 失去焦点转换_驼峰转换下划线
+		 */
+		function tranToLine() {
+			$("#toLineIdAfter").val((toLine($("#toLineId").val().trim())).toLocaleUpperCase());
+		}
+ 
+		/**
+		 * 下划线转换驼峰
+		 * @param {Object} name
+		 */
+		function toHump(name) {
+			return name.replace(/\_(\w)/g, function(all, letter) {
+				return letter.toUpperCase();
+			});
+		}
+ 
+		/**
+		 * 驼峰转换下划线
+		 * @param {Object} name
+		 */
+		function toLine(name) {
+			return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+		}
+	</script>
+</html>
