@@ -1,0 +1,1 @@
+java -jar moco-runner-1.3.0-standalone.jar https -p 449 -c moco.json --https my.jks --cert 123456 --keystore 123456
