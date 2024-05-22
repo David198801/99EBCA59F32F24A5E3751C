@@ -1,3 +1,4 @@
+#检查par2文件是否有对应的vol.par2文件
 import os
 import subprocess
 import shutil

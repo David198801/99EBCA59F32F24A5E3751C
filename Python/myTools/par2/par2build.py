@@ -3,8 +3,8 @@ import subprocess
 import shutil
 import re
 
-inPath = r"f:\f"
-outPath = r"e:\p"
+inPath = r"G:\f"
+outPath = r"F:\p"
 
 
 par2jPath = "par2j"

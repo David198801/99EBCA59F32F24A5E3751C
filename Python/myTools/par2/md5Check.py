@@ -8,7 +8,7 @@ import time
 
 
 
-inPath = r"I:\p"
+inPath = r"F:\p"
 outPath = r"."
 md5FileName = "1600p.db"
 commitSize = 100
@@ -56,6 +56,11 @@ try:
                 print(err)
                 txt.write(err + "\n")
             txt.flush()
+    print("[done]")
+except Exception as e:
+    print(e)
+    txt.write(str(e) + "\n")
 finally:
     txt.close()
     conn.close()
+    
