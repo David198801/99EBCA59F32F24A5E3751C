@@ -44,6 +44,11 @@ def buildPar2(par2Path,filePathI):
     cmdList = [par2jPath,"c","/rr10","/rf1","/d"+os.path.dirname(filePathI),par2Path,os.path.basename(filePathI)]
     subprocess.run(cmdList)
     
+txt = open("par2build.txt","w",encoding="utf8")
+
+count=0
+countSize0=0
+    
 # 创建par2
 inWalkList = os.walk(inPath)
 for rootI,dirsI,filesI in inWalkList:
@@ -51,7 +56,11 @@ for rootI,dirsI,filesI in inWalkList:
         filePathI = os.path.join(rootI,fileI)
         filePathO = filePathI.replace(inPath,outPath,1)
         par2Path = filePathO+".par2"
+        count+=1
         if os.path.getsize(filePathI)==0:#0字节文件跳过
+            countSize0+=1
+            txt.write(filePathI+'\n')
+            txt.flush()
             continue
         if (not os.path.exists(par2Path)):
             buildPar2(par2Path,filePathI)
@@ -66,3 +75,8 @@ for rootI,dirsI,filesI in inWalkList:
                         print("[delete] " + p)
                         os.remove(p)
                 buildPar2(par2Path,filePathI)
+print("总数:"+str(count))
+print("0字节跳过文件数:"+str(countSize0))
+print("总数-0字节跳过文件数:"+str(count-countSize0))
+print("(总数-0字节跳过文件数)*2:"+str((count-countSize0)*2))
+txt.close()

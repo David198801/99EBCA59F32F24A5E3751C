@@ -8,9 +8,9 @@ import time
 
 
 
-inPath = r"I:\p"
+inPath = r"F:\p"
 outPath = r"."
-md5FileName = r"C:\db\1600p.db"
+md5FileName = r"1600p.db"
 commitSize = 100
 
 if not inPath.endswith(os.path.sep):

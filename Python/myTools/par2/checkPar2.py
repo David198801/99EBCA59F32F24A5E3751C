@@ -4,8 +4,8 @@ import subprocess
 import shutil
 import re
 
-inPath = r"F:\f"
-outPath = r"G:\p"
+inPath = r"G:\f"
+outPath = r"F:\p"
 
 par2Set = set()
 fileSet = set()
