@@ -79,7 +79,7 @@ async function fetchAndApply(request) {
 	new_response_headers.delete('clear-site-data');
 	
 	const content_type = new_response_headers.get('content-type');
-	if ( url.pathname.startsWith("/ck.php")) {
+	if ( url.pathname.endsWith("ck.php")) {
 		resp_content = original_response.body
 	}else if (content_type != null && content_type.includes('text/html')) {
 		resp_content = await replace_response_text(original_response, upstream_domain, url_hostname);
