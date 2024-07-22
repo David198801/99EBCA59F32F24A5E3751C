@@ -1,0 +1,6 @@
+节点1(crust),https://gw.w3ipfs.cn:10443/
+节点2(crust),https://gw.w3ipfs.com:7443/
+节点3(crust),https://gw.w3ipfs.net:7443/
+节点4(crust),https://gw.smallwolf.me/
+节点5(crust),https://crustgateway.online
+节点6(ipfs),https://ipfs.io

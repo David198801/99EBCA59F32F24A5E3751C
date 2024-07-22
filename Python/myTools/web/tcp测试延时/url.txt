@@ -1,0 +1,14 @@
+https://crust.fans
+https://crustipfs.info
+https://gw.w3ipfs.org.cn
+https://gateway.aitimeout.site:18001
+http://223.111.148.195:8080/
+https://crustgateway.com/
+https://crustgateway.online
+https://gateway.crustgateway.com
+https://gw.w3ipfs.net:7443/
+https://gw.w3ipfs.com:7443/
+http://223.111.148.196:8080/
+https://gw.w3ipfs.cn:10443/
+https://gw.smallwolf.me/
+https://gate.muggleblock.com/

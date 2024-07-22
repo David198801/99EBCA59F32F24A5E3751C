@@ -1,8 +1,8 @@
 #coding:utf-8
 w = 150
 h = 270
-myW = 1548
-myH = 2035
+myW = int(input("宽度="))
+myH = int(input("高度="))
 n = w/myW #先以w为准
 myW = w
 myH = n*myH
