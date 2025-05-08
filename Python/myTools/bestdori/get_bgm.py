@@ -53,7 +53,7 @@ def get_mp3_urls(mp3_urls):
 
                 archive_url = explorer_url + "/" + file_name
                 print("正在处理 " + archive_url)
-                
+
                 driver.get(archive_url)
                 time.sleep(TIME_DELAY)
 
@@ -71,11 +71,17 @@ def get_mp3_urls(mp3_urls):
                         mp3_url = explorer_url.replace("tool/explorer/asset/",
                                                        "assets/") + "/" + file_name + "_rip/" + mp3_file_name
                         mp3_urls.append(mp3_url)
+                        print("抓取到 "+mp3_url)
                 # 测试
                 # break
 
 
 def download_mp3(mp3_urls):
+    txtpath = os.path.join(out_path,"bgmlist.txt")
+    with open(txtpath,"w",encoding="utf8") as txt:
+        for url in mp3_urls:
+            txt.write(url+"\n")
+
     for url in mp3_urls:
         filename = url.split("/")[-1]
         filepath = os.path.join(out_path, filename)
@@ -83,22 +89,22 @@ def download_mp3(mp3_urls):
             print("跳过 " + url)
             continue
 
-        try:
-            print("正在下载 " + url)
-            time.sleep(0.1)
-            response = None
-            if proxies:
-                response = requests.get(url, stream=True, proxies=proxies)
-            else:
-                response = requests.get(url, stream=True)
-            if response.status_code == 200:
-                with open(filepath, 'wb') as f:
-                    for chunk in response.iter_content(1024):
-                        f.write(chunk)
-                break
-        except Exception:
-            print("请求失败，重试")
-            time.sleep(TIME_DELAY)
+        while True:
+            try:
+                print("正在下载 " + url)
+                time.sleep(0.1)
+                response = None
+                if proxies:
+                    response = requests.get(url, stream=True, proxies=proxies)
+                else:
+                    response = requests.get(url, stream=True)
+                if response.status_code == 200:
+                    with open(filepath, 'wb') as f:
+                        for chunk in response.iter_content(1024):
+                            f.write(chunk)
+                    break
+            except Exception:
+                print("请求失败")
 
 
 if __name__ == '__main__':
