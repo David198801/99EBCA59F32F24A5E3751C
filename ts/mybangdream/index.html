@@ -8,12 +8,24 @@
     <script src="./src/lib/live2d.min.js"></script>
     <script src="./src/lib/live2dcubismcore.min.js"></script>
 
+    <style>
+      #fullscreen_button {
+          position: absolute;
+          right: 20px;  /* 距离右侧 20px */
+          bottom: 20px; /* 距离底部 20px */
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+      }
+    </style>
+
     <title>Vite + TS</title>
   </head>
   <body>
-    <div style="width:100%;height:100%;z-index: -1000;">
+    <div>
       <canvas id="canvas_view"></canvas>
     </div>
+    <button id="fullscreen_button">全屏</button>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
