@@ -1,31 +1,62 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="./src/lib/live2d.min.js"></script>
-    <script src="./src/lib/live2dcubismcore.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-      #fullscreen_button {
-          position: absolute;
-          right: 20px;  /* 距离右侧 20px */
-          bottom: 20px; /* 距离底部 20px */
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-      }
-    </style>
+  <script src="./src/lib/live2d.min.js"></script>
+  <script src="./src/lib/live2dcubismcore.min.js"></script>
 
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div>
-      <canvas id="canvas_view"></canvas>
-    </div>
-    <button id="fullscreen_button">全屏</button>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      /* 启用Flex布局 */
+      flex-direction: row;
+      /* 横向排列 */
+      align-items: flex-start;
+      /* 顶部对齐 */
+    }
+
+    #canvas_view {
+      width: 80%;
+      height: 80vh;
+      margin-right: 5px;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+
+    .button-container {
+      display: flex;
+      /* 按钮容器启用Flex */
+      flex-direction: column;
+      /* 按钮垂直排列 */
+      gap: 20px;
+      /* 按钮间距 */
+      padding: 20px 0;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 移除原来的margin设置 */
+    }
+  </style>
+
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <canvas id="canvas_view"></canvas>
+  <div class="button-container">
+    <button id="paly_button" class="btn">播放</button>
+    <button id="fullscreen_button" class="btn">全屏</button>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
