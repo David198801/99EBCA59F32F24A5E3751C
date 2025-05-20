@@ -34,6 +34,9 @@ export async function play(app, isFullScreen: boolean) {
 
     //model1.x += 100;
     moveModel(model1,300,0,1)
+
+    //playAudio("../res/volcal/08_.wav");
+    //walk(model1,1000,0,3);
     
     model1.motion("nf02");
 
@@ -46,3 +49,11 @@ export async function play(app, isFullScreen: boolean) {
 
 
 }
+
+function playAudio(arg0: string) {
+    throw new Error("Function not implemented.");
+}
+function walk(model1: Live2DModel<InternalModel>, arg1: number, arg2: number, arg3: number) {
+    throw new Error("Function not implemented.");
+}
+
