@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>填SQL参数</title>
+    <script src="./lib/date.min.js"></script>
+	<script src="./lib/sql-formatter.min.js"></script>
+    <script>
+	    function isValidJavaDate(dateStr) {
+		  const regex = /^[A-Za-z]{3} [A-Za-z]{3} \d{2} \d{2}:\d{2}:\d{2} [A-Za-z]{3} \d{4}$/;
+		  return regex.test(dateStr);
+		}
+		
+        function fillDate(dateStr, sql) {
+            const pattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (pattern.test(dateStr)) {
+                sql = sql.replace('?', "date'" + dateStr + "'", 1);
+                return sql;
+            }
+			
+			if (isValidJavaDate(dateStr)){
+				const dateObj = Date.parseExact(dateStr,"ddd MMM dd HH:mm:ss ... yyyy");//Fri Dec 20 00:00:00 CST 2024
+				const formattedDate = dateObj.toString('yyyy-MM-dd')
+				sql = sql.replace('?', "date'" + formattedDate + "'", 1);
+				return sql;
+			}
+
+            return null;
+        }
+
+        function processSQL() {
+            const paramsText = document.getElementById("params").value.trim();
+            const sqlText = document.getElementById("sql").value.trim();
+			// 删除第一个 "[" 和最后一个 "]"
+            const params = paramsText.replace(/^\[/, '').replace(/\]$/, '')
+				.replace(/^【/, '').replace(/】$/, '').split(",")
+
+            let sql = sqlText;
+
+            params.forEach(param => {
+                param = param.trim();
+                const temp = fillDate(param, sql);
+                if (temp) {
+                    sql = temp;
+                } else {
+                    sql = sql.replace('?', "'" + param + "'", 1);
+                }
+            });
+			
+			if(document.getElementById("isformat").checked){
+				sql = formatSQL(sql);
+			}
+
+            document.getElementById("output").value = sql;
+			
+			copyToClipboard()
+        }
+		
+		function formatSQL(s) {
+			return sqlFormatter.format(s, { language: 'mysql' });
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById("output");
+            outputText.select();
+            document.execCommand("copy");
+        }
+    </script>
+</head>
+<body>
+    <h2>SQL 参数替换工具</h2>
+    <p>请输入 SQL 参数（格式：[参数1, 参数2, 参数3]，支持无括号或【】）：</p>
+    <textarea id="params" rows="4" cols="50"></textarea>
+    <p>请输入 SQL （包含问号占位符）：</p>
+    <textarea id="sql" rows="4" cols="50"></textarea>
+    <br>
+	<input id="isformat" type="checkbox" name="isformat" checked="true" />输出时格式化
+    <button onclick="processSQL()">替换并复制到剪贴板</button>
+    <br><br>
+    <p>替换后的 SQL：</p>
+    <textarea id="output" rows="50" cols="180" readonly></textarea>
+    <br><br>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SQL格式化工具</title>
+    <style>
+        #output { background: #f5f5f5; padding: 10px; }
+    </style>
+    <script src="./lib/sql-formatter.min.js"></script>
+</head>
+<body>
+    <h3>SQL格式化工具</h3>
+    <textarea id="input" rows="8" style="width: 80%;"></textarea>
+    <button onclick="formatSQL()">格式化</button>
+	<hr/>
+	<textarea id="output" rows="50" cols="180" readonly></textarea>			
+    <script>
+        function formatSQL() {
+            const input = document.getElementById('input').value;
+            const formatted = sqlFormatter.format(input, { language: 'mysql' });
+			var op =  document.getElementById('output');
+            op.textContent = formatted;
+			copyToClipboard(op)
+        }
+
+        function copyToClipboard(ele) {
+            ele.select();
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+</html>
