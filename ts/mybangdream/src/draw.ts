@@ -2,6 +2,26 @@ import * as PIXI from 'pixi.js'
 
 window.PIXI = PIXI;
 
+export const LAYER = {
+    BG : 0,
+    LIVE2D1 : 1,
+    LIVE2D2 : 2,
+    LIVE2D3 : 3,
+    LIVE2D4 : 4,
+    LIVE2D5 : 5,
+    UI1 : 6,
+    UI2 : 7,
+    UI3 : 8,
+    UI4 : 9,
+    UI5 : 10,
+    UI6 : 11,
+    UI7 : 12,
+    UI8 : 13,
+    UI9 : 14,
+    UI10 : 15,
+}
+
+
 export async function init(w, h) {
     const canvas_view = document.getElementById('canvas_view') as HTMLCanvasElement;
 
@@ -18,7 +38,6 @@ export async function init(w, h) {
     canvas_view.style.border = '2px solid black';
 
     scaleCanvas(app, canvas_view);
-
     return app;
 }
 
@@ -47,7 +66,9 @@ export async function changeBg(app, imageUrl) {
     background.width = app.screen.width;
     background.height = app.screen.height;
 
-    app.stage.addChild(background);
+
+    app.stage.removeChildAt(LAYER.BG);
+    app.stage.addChildAt(background,LAYER.BG);
 }
 
 const IntervalIds = {
@@ -58,12 +79,12 @@ export async function drawUI(app) {
     const menu = PIXI.Sprite.from("../res/img/右上角菜单.png");
     menu.width = app.screen.width;
     menu.height = app.screen.height;
-    app.stage.addChild(menu);
+    app.stage.addChildAt(menu, LAYER.UI1);
 
     const textBox = PIXI.Sprite.from("../res/img/姓名框和对话框.png");
     textBox.width = app.screen.width;
     textBox.height = app.screen.height;
-    app.stage.addChild(textBox);
+    app.stage.addChildAt(textBox, LAYER.UI2);
 
 
     const auto = PIXI.Sprite.from("../res/img/AUTO.png");
@@ -71,7 +92,7 @@ export async function drawUI(app) {
     auto.y = 785;  // 设置Y坐标
     auto.width = 150;
     auto.height = 50;
-    app.stage.addChild(auto);
+    app.stage.addChildAt(auto, LAYER.UI3);
     // 让uiLayer每500毫秒闪烁
     if (IntervalIds.autoIntervalId) {
         console.log("claerInterval:" + IntervalIds.autoIntervalId)
@@ -86,6 +107,14 @@ export async function drawUI(app) {
 
 export async function clearApp(app) {
     app.stage.removeChildren().forEach(child => child.destroy());
+
+    //预先填充图层
+    const layerNum = Object.keys(LAYER).length;
+    for (let i = 0; i < layerNum; i++) {
+        const placeholder = new PIXI.Container();
+        placeholder.visible = false; // 可选：隐藏占位元素
+        app.stage.addChild(placeholder);
+    }
 }
 
 export function drawNameAndText(app, name, text) {
@@ -105,10 +134,10 @@ export function drawName(app, textContent) {
     text.y = 750;  // Y坐标
 
     // 将文本添加到舞台
-    if(app.stage.children.length>6){
-        app.stage.removeChildAt(6);
+    if(app.stage.children.length> LAYER.UI4){
+        app.stage.removeChildAt(LAYER.UI4);
     }
-    app.stage.addChildAt(text,6);
+    app.stage.addChildAt(text,LAYER.UI4);
 }
 
 
@@ -124,10 +153,10 @@ export function drawText(app, textContent) {
     text.y = 830;  // Y坐标
 
     // 将文本添加到舞台
-     if(app.stage.children.length>7){
-        app.stage.removeChildAt(7);
+     if(app.stage.children.length>LAYER.UI5){
+        app.stage.removeChildAt(LAYER.UI5);
     }
-    app.stage.addChildAt(text,7);
+    app.stage.addChildAt(text,LAYER.UI5);
 
     //打字机效果
     let currentIndex = 0;

@@ -1,63 +1,50 @@
-
 import gsap from 'gsap';
 import {
     Live2DModel,
     MotionPreloadStrategy,
     InternalModel,
 } from 'pixi-live2d-display';
+import { sleep } from './tools';
+
+export const IDLE_MOTIONS = {
+    BLINK:'idle_blink',
+    CLOSE_EYES:'idle_close_eyes',
+}
 
 
 
-
-
-export async function loadModel(modelPath, app, x, y): Promise<Live2DModel> {
+export async function loadModel(modelPath, app, x, y,layer): Promise<Live2DModel> {
     const model = await Live2DModel.from(modelPath, {
         motionPreload: MotionPreloadStrategy.ALL,
         autoInteract: false
     });
-    app.stage.addChild(model);  // 将模型添加到舞台
+    app.stage.addChildAt(model,layer);  // 将模型添加到舞台
     model.position.set(x, y);  // 设置模型的位置
 
     model.scale.set(0.58, 0.58);
     model.anchor.set(0, 0);
 
-    //关闭有问题的自动眨眼，目前用idle动作实现自动眨眼，idle_closeeyes实现闭眼
-    // if (model.internalModel.eyeBlink) {
-    //     model.internalModel.eyeBlink.blinkInterval = 1000 * 60 * 60 * 24; // @ts-ignore
-    //     model.internalModel.eyeBlink.nextBlinkTimeLeft = 1000 * 60 * 60 * 24;
-    // }
+    //关闭有问题的自动眨眼
+    /*
+    if (model.internalModel["eyeBlink"]) {
+        model.internalModel["eyeBlink"].blinkInterval = 1000 * 60 * 60 * 24;
+        model.internalModel["eyeBlink"].nextBlinkTimeLeft = 1000 * 60 * 60 * 24;
+    }
+    */
     //关闭摇摆
     if (model.internalModel["angleXParamIndex"] !== undefined) model.internalModel["angleXParamIndex"] = 999;
     if (model.internalModel["angleYParamIndex"] !== undefined) model.internalModel["angleYParamIndex"] = 999;
     if (model.internalModel["angleZParamIndex"] !== undefined) model.internalModel["angleZParamIndex"] = 999;
 
+    //关闭呼吸
+    // if (model.internalModel["bodyAngleXParamIndex"] !== undefined) model.internalModel["bodyAngleXParamIndex"] = 999;
+    // if (model.internalModel["breathParamIndex"] !== undefined) model.internalModel["breathParamIndex"] = 999;
+
 
     // model1.internalModel.eyeBlink.setEyeParams(0)
 
-    //默认idle，可指定，不想眨眼就置空
-    //model.internalModel.motionManager.groups.idle = 'idle01';
-
-    // const left_eye_param_index = model.internalModel.coreModel.getParamIndex("PARAM_EYE_L_OPEN");
-    // const right_eye_param_index = model.internalModel.coreModel.getParamIndex("PARAM_EYE_R_OPEN");
-
-    // 自动眨眼功能
-    // const blinkInterval = 3000;  // 设置为每3秒触发一次眨眼
-    // setInterval(() => {
-    //     if (model && !model.internalModel.motionManager.playing) {
-    //         console.log("眨眼")
-    //         // 模型没有在播放其他动作时才触发眨眼
-    //         // 模拟眨眼，控制眼睛的打开和闭合
-    //         model.internalModel.coreModel.multParamFloat(left_eye_param_index, 0);  // 左眼闭合
-    //         model.internalModel.coreModel.multParamFloat(right_eye_param_index, 0);  // 右眼闭合
-
-    //         // 恢复眼睛打开
-    //         setTimeout(() => {
-    //             model.internalModel.coreModel.setParamFloat(left_eye_param_index, 1);  // 左眼打开
-    //             model.internalModel.coreModel.setParamFloat(right_eye_param_index, 1);  // 右眼打开
-    //         }, 200);  // 200ms后恢复眼睛睁开
-    //     }
-    // }, blinkInterval);
-
+    //默认idle，可指定
+    model.internalModel.motionManager.groups.idle = '';
 
     return model;  // 返回模型对象
 }
@@ -154,6 +141,7 @@ export async function moveModel(model,x,y,seconds) {
 export async function walk(model,x,y,seconds) {
     const wk = gsap.timeline({repeat: 0});
     const yDuration = 0.25;
+    const repeat = Math.floor(seconds/yDuration)-3;
     wk.to(model.position, {
         x: model.x + x,
         duration: seconds,
@@ -162,10 +150,49 @@ export async function walk(model,x,y,seconds) {
         y: model.y + y + 15,
         duration: yDuration,
         yoyo: true,
-        repeat: Math.floor(seconds/yDuration)-3,
+        repeat: repeat<0?0:repeat,
         ease: "sine.inOut"
     }, 0);
 }
 
 
 
+export function stopMotion(model){
+    model.internalModel.motionManager.stopAllMotions();
+}
+
+export function stopExpression(model){
+    model.internalModel.motionManager.expressionManager.stopAllExpressions();
+}
+
+export function setIdle(model, value){
+    model.internalModel.motionManager.groups.idle = value;
+}
+
+export async function openEyes(model, start_value) {
+    //coreModel.getParameterValueById(expParamId) 还没试
+    model.internalModel.motionManager.groups.idle = '';
+    stopExpression(model);
+
+    const left_eye_param_index = model.internalModel.coreModel.getParamIndex("PARAM_EYE_L_OPEN");
+    const right_eye_param_index = model.internalModel.coreModel.getParamIndex("PARAM_EYE_R_OPEN");
+    
+
+    let currentValue = start_value;
+    
+    while(1){
+        if(currentValue>=1){
+            model.internalModel.coreModel.setParamFloat(left_eye_param_index, 1);
+            model.internalModel.coreModel.setParamFloat(right_eye_param_index, 1);
+            break;
+        }else{
+            model.internalModel.coreModel.setParamFloat(left_eye_param_index, currentValue);
+            model.internalModel.coreModel.setParamFloat(right_eye_param_index, currentValue);
+            await sleep(5);
+        }
+        currentValue += 0.0025;
+    }
+
+    setIdle(model, IDLE_MOTIONS.BLINK);
+    
+}
