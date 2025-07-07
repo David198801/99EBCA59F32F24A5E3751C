@@ -25,12 +25,10 @@ export async function loadModel(modelPath, app, x, y,layer): Promise<Live2DModel
     model.anchor.set(0, 0);
 
     //关闭有问题的自动眨眼
-    /*
     if (model.internalModel["eyeBlink"]) {
         model.internalModel["eyeBlink"].blinkInterval = 1000 * 60 * 60 * 24;
         model.internalModel["eyeBlink"].nextBlinkTimeLeft = 1000 * 60 * 60 * 24;
     }
-    */
     //关闭摇摆
     if (model.internalModel["angleXParamIndex"] !== undefined) model.internalModel["angleXParamIndex"] = 999;
     if (model.internalModel["angleYParamIndex"] !== undefined) model.internalModel["angleYParamIndex"] = 999;
@@ -136,6 +134,22 @@ export async function moveModel(model,x,y,seconds) {
         repeat: 0, //0：执行一次，1：重复一次（执行2次），-1是无限循环
         yoyo: false,
     })
+}
+
+export async function rotateModel(model, angle, seconds) {
+    // 获取模型边界（需确保模型已加载完成）
+    const bounds = model.getLocalBounds();
+
+    // 动态补偿偏移：将模型中心对齐到锚点 (0,0) 的等效位置
+    gsap.to(model, {
+        x: model.x - bounds.width,
+        y: model.y + bounds.height,
+        rotation: model.rotation + angle,
+        duration: seconds,
+        ease: 'power1.inOut',
+        repeat: 0,
+        yoyo: false
+    });
 }
 
 export async function walk(model,x,y,seconds) {

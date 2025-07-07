@@ -134,9 +134,8 @@ export function drawName(app, textContent) {
     text.y = 750;  // Y坐标
 
     // 将文本添加到舞台
-    if(app.stage.children.length> LAYER.UI4){
-        app.stage.removeChildAt(LAYER.UI4);
-    }
+    app.stage.removeChildAt(LAYER.UI4);
+
     app.stage.addChildAt(text,LAYER.UI4);
 }
 
@@ -153,9 +152,8 @@ export function drawText(app, textContent) {
     text.y = 830;  // Y坐标
 
     // 将文本添加到舞台
-     if(app.stage.children.length>LAYER.UI5){
-        app.stage.removeChildAt(LAYER.UI5);
-    }
+    app.stage.removeChildAt(LAYER.UI5);
+
     app.stage.addChildAt(text,LAYER.UI5);
 
     //打字机效果
