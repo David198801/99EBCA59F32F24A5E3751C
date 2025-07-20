@@ -159,10 +159,94 @@ export async function drawTextBox(app) {
     await sleep(duration * 1000);
 }
 
-export async function drawNameBoxAndTextBox(app) {
+export async function drawNameBoxAndTextBoxStartIn(app) {
     await drawTextBox(app);
     await drawNameBox(app);
 }
+
+export async function drawNameBoxAndTextBoxTurnIn(app) {
+    const duration = 0.1;
+
+    const textBox = app.stage.getChildAt(LAYER.UI1);
+    const nameBox = app.stage.getChildAt(LAYER.UI2);
+    const name = app.stage.getChildAt(LAYER.UI4);
+
+    await sleep(duration * 1000);
+
+    name.alpha = 1;
+    textBox.alpha = 1;
+    nameBox.alpha = 1;
+
+    // 创建 GSAP 时间线（控制动画序列）
+    const timeline = gsap.timeline();
+    timeline.to(textBox, {
+        width:app.screen.width * 1.1,
+        height:app.screen.height  * 1.1,
+        x:-95,
+        y:-90,
+        duration: duration,          
+        ease: "power1.inOut" 
+    }, 0);
+    timeline.to(nameBox, {
+        width:app.screen.width * 1.1,
+        height:app.screen.height  * 1.1,
+        x:-95,
+        y:-90,
+        duration: duration,          
+        ease: "power1.inOut" 
+    }, 0);
+    timeline.to(name.scale, {  
+        x:1.1,
+        y:1.1,             
+        duration: duration,
+        ease: "power1.inOut"       
+    }, 0); 
+    timeline.to(name, {  
+        x:158,
+        y:737,             
+        duration: duration,
+        ease: "power1.inOut"       
+    }, 0);     
+
+    await sleep(duration * 1000);
+
+
+    // 创建 GSAP 时间线（控制动画序列）
+    const timeline2 = gsap.timeline();
+    timeline2.to(textBox, {
+        width:app.screen.width,
+        height:app.screen.height,
+        x:0,
+        y:0,
+        duration: duration,          
+        ease: "power1.inOut" 
+    }, 0);
+    timeline2.to(nameBox, {
+        width:app.screen.width,
+        height:app.screen.height,
+        x:0,
+        y:0,
+        duration: duration,          
+        ease: "power1.inOut" 
+    }, 0);
+    timeline2.to(name.scale, {  
+        x:1,
+        y:1,             
+        duration: duration,
+        ease: "power1.inOut"       
+    }, 0); 
+    timeline2.to(name, {  
+        x:225,
+        y:750,             
+        duration: duration,
+        ease: "power1.inOut"       
+    }, 0);     
+
+    await sleep(duration * 1000);
+
+    
+}
+
 
 export async function clearApp(app) {
     app.stage.removeChildren().forEach(child => child.destroy());
@@ -403,9 +487,7 @@ export async function turnIn(app, textContent) {
 }
 
 
-export async function end(app, onBlack) {
-    console.log(app.stage.children)
-    app.stage.getChildAt(12).visible = false
+export async function end(app, nextName, onBlack) {
 
     const duration = 0.2;
 
@@ -476,6 +558,19 @@ export async function end(app, onBlack) {
     name.alpha = 0;
     textBox.alpha = 0;
     nameBox.alpha = 0;
+    textBox.width = app.screen.width * 0.35;
+    textBox.height = app.screen.height  * 0.35;
+    textBox.x = 625
+    textBox.y = 595
+    nameBox.width = app.screen.width * 0.35;
+    nameBox.height = app.screen.height  * 0.35;
+    nameBox.x = 625
+    nameBox.y = 595
+    name.scale.set(0.35);
+    name.x = 705;
+    name.y = 857;
+
+    name.text = nextName;
 
 
     const duration2 = 0.8;
