@@ -12,15 +12,15 @@ export const IDLE_MOTIONS = {
 }
 
 
-
 export async function loadModel(modelPath, app, x, y,layer): Promise<Live2DModel> {
     const model = await Live2DModel.from(modelPath, {
         motionPreload: MotionPreloadStrategy.ALL,
         autoInteract: false
     });
+    app.stage.removeChildAt(layer);  // 将模型添加到舞台
     app.stage.addChildAt(model,layer);  // 将模型添加到舞台
     model.position.set(x, y);  // 设置模型的位置
-
+    model.alpha = 0;
     model.scale.set(0.58, 0.58);
     model.anchor.set(0, 0);
 
@@ -47,7 +47,11 @@ export async function loadModel(modelPath, app, x, y,layer): Promise<Live2DModel
     return model;  // 返回模型对象
 }
 
-
+export async function setModelAlpha(arr , a){
+    for(let i=0;i<arr.length;i++){
+        arr[i].alpha = a;
+    }
+}
 
 
 
