@@ -20,7 +20,8 @@ export async function loadModel(modelPath, app, x, y,layer): Promise<Live2DModel
     app.stage.removeChildAt(layer);  // 将模型添加到舞台
     app.stage.addChildAt(model,layer);  // 将模型添加到舞台
     model.position.set(x, y);  // 设置模型的位置
-    model.alpha = 0;
+    //model.alpha = 0;
+    setModelOpaciy([model], 0);
     model.scale.set(0.58, 0.58);
     model.anchor.set(0, 0);
 
@@ -213,4 +214,50 @@ export async function openEyes(model, start_value) {
 
     setIdle(model, IDLE_MOTIONS.BLINK);
     
+}
+
+
+export async function setModelOpaciy(modelArr, opacity){
+    for(let h=0;h<modelArr.length;h++){
+        let model = modelArr[h];
+        for(let i=1;i<17;i++){
+            model.internalModel.coreModel.setPartsOpacity(i, opacity);
+        }
+    }
+    
+	// model.pose.partsGroups.forEach((group) => {
+	// 	group.forEach((parts) => {
+	// 		if (parts.paramIndex >= 0) {
+	// 			model.internalModel.coreModel.setPartsOpacity(parts.partsIndex, opacity);
+	// 		}
+	// 	});
+	// });
+}
+
+export async function modelFadeIn(modelArr){
+    setModelOpaciy(modelArr, 0.3);
+
+    await sleep(25);
+
+    setModelOpaciy(modelArr, 0.6);
+
+    await sleep(25);
+
+    setModelOpaciy(modelArr,1);
+
+    await sleep(25);
+}
+
+export async function modelFadeOut(modelArr){
+    setModelOpaciy(modelArr, 1);
+
+    await sleep(25);
+
+    setModelOpaciy(modelArr, 0.6);
+
+    await sleep(25);
+
+    setModelOpaciy(modelArr,0.3);
+
+    await sleep(25);
 }

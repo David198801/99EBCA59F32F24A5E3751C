@@ -1,5 +1,5 @@
 import { changeBg, clearApp, drawMenu, drawName, drawNameAndText, drawText, drawAuto, LAYER, startIn, drawNameBoxAndTextBoxStartIn, turnIn, end, hideBlack, drawNameBoxAndTextBoxTurnIn } from "./draw";
-import { loadModel, playVocal, moveModel, walk, stopMotion, openEyes, IDLE_MOTIONS, stopExpression, setIdle, rotateModel, setModelAlpha } from "./live2d";
+import { loadModel, playVocal, moveModel, walk, stopMotion, openEyes, IDLE_MOTIONS, stopExpression, setIdle, rotateModel, setModelAlpha, setModelOpaciy, modelFadeIn, modelFadeOut } from "./live2d";
 import { playAudio, sleep } from "./tools";
 import type { Live2DModel, InternalModel } from "pixi-live2d-display";
 
@@ -20,7 +20,7 @@ export async function play(app, isFullScreen: boolean) {
     const ako = await loadModel('../res/live2d/024_casual_summer-2023/model.json', app, 50, -80, LAYER.LIVE2D1);
     const rinrin = await loadModel('../res/live2d/025_casual_summer-2023/model.json', app, 620, -80, LAYER.LIVE2D2);
     //模型同步显示
-    await setModelAlpha([ako,rinrin], 1);
+    modelFadeIn([ako, rinrin]);
     //弹出对话框
     await drawNameBoxAndTextBoxStartIn(app);
     await drawAuto(app);
@@ -53,7 +53,7 @@ export async function play(app, isFullScreen: boolean) {
     ako.expression("ako_special02");
 
     await sleep(2.5 * 1000);
-    console.log(2);console.log(app.stage.children.length)
+
     stopMotion(ako);
     ako.expression("smile01");
     await sleep(1 * 1000);
@@ -67,7 +67,7 @@ export async function play(app, isFullScreen: boolean) {
         //切换背景
         changeBg(app, "../res/background/bg00046 燐子家 1080.png");
         //隐藏模型
-        setModelAlpha([ako,rinrin], 0);
+        setModelOpaciy([ako,rinrin], 0);
         //换位置、载入新模型等
         ako.x = 620;
         rinrin.x = 50; 
@@ -79,7 +79,7 @@ export async function play(app, isFullScreen: boolean) {
     //转场条
     await turnIn(app,"白金家 燐子房间");
     //模型同步显示
-    await setModelAlpha([ako,rinrin], 1);
+    modelFadeIn([ako, rinrin]);
     //弹出对话框
     await drawNameBoxAndTextBoxTurnIn(app);
     await drawAuto(app);
