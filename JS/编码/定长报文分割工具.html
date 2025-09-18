@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>定长报文分割工具</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .input-container {
+      margin-bottom: 20px;
+    }
+    .input-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-container input, .input-container textarea, .input-container select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .input-container textarea {
+      min-height: 150px;
+      font-family: monospace;
+    }
+    .radio-group {
+      margin-bottom: 15px;
+    }
+    .radio-group label {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    .encoding-select {
+      max-width: 200px;
+      margin-left: 20px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      white-space: pre;
+    }
+    th {
+      background-color: #f2f2f2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .result-container {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>定长报文分割工具</h1>
+  
+  <div class="input-container">
+    <label for="lengths">列长度数组（如：2,8,12,6,3）：</label>
+    <input type="text" id="lengths" placeholder="输入以逗号分隔的数字数组" value="2,8,12,6,3">
+  </div>
+  
+  <div class="input-container">
+    <label for="messages">报文内容（每行一条数据）：</label>
+    <textarea id="messages" placeholder="输入报文，每行一条数据"></textarea>
+  </div>
+  
+  <div class="radio-group">
+    <label>分割方式：</label>
+    <label>
+      <input type="radio" name="splitMode" value="char"> 按字符分割
+    </label>
+    <label>
+      <input type="radio" name="splitMode" value="byte" checked> 按字节分割
+    </label>
+    
+    <select id="encoding" class="encoding-select">
+      <option value="gbk">GBK</option>
+      <option value="utf8">UTF-8</option>
+      <option value="big5">BIG5</option>
+    </select>
+  </div>
+  
+  <button id="splitButton">分割报文</button>
+  
+  <div class="result-container">
+    <table id="resultTable"></table>
+  </div>
+
+  <script src="./iconv.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 元素引用
+      const lengthsInput = document.getElementById('lengths');
+      const messagesInput = document.getElementById('messages');
+      const splitModeRadios = document.getElementsByName('splitMode');
+      const encodingSelect = document.getElementById('encoding');
+      const splitButton = document.getElementById('splitButton');
+      const resultTable = document.getElementById('resultTable');
+      
+      // 根据分割方式显示/隐藏编码选择
+      for (let radio of splitModeRadios) {
+        radio.addEventListener('change', function() {
+          if (this.value === 'byte') {
+            encodingSelect.classList.remove('hidden');
+          } else {
+            encodingSelect.classList.add('hidden');
+          }
+        });
+      }
+      
+      // 执行分割操作
+      splitButton.addEventListener('click', function() {
+        // 获取输入值
+        const lengthStr = lengthsInput.value;
+        const messages = messagesInput.value.split('\n');
+        const isByteMode = document.querySelector('input[name="splitMode"]:checked').value === 'byte';
+        const encoding = encodingSelect.value;
+        
+        // 解析长度数组
+        const lengths = lengthStr.split(',')
+          .map(s => s.trim())
+          .filter(s => s.length > 0)
+          .map(s => parseInt(s, 10));
+        
+        if (lengths.length === 0 || lengths.some(isNaN)) {
+          alert('请输入有效的长度数组!');
+          return;
+        }
+        
+        // 清空表格
+        resultTable.innerHTML = '';
+        
+        // 创建表头
+        const headerRow = document.createElement('tr');
+        for (let i = 0; i < lengths.length; i++) {
+          const th = document.createElement('th');
+          th.textContent = `s${i}`;
+          headerRow.appendChild(th);
+        }
+        resultTable.appendChild(headerRow);
+        
+        // 处理每行报文
+        messages.forEach(message => {
+          if (!message.trim()) return;
+          
+          const row = document.createElement('tr');
+          let remainingMsg = message;
+          let position = 0;
+          
+          // 按指定长度截取报文
+          for (let len of lengths) {
+            const td = document.createElement('td');
+            
+            if (isByteMode) {
+              // 按字节分割
+              try {
+                // 使用TextEncoder直接处理字节（浏览器环境下的简化操作）
+                // 真实场景中应使用iconv-lite，但在浏览器中直接使用需要额外配置
+                const bytes = iconv.encode(remainingMsg,encoding);
+                
+                if (position < bytes.length) {
+                  // 获取指定长度的字节
+                  const slicedBytes = bytes.slice(position, position + len);
+                  
+                  // 转回字符串（简化处理，实际应使用iconv-lite）
+                  td.textContent = iconv.decode(slicedBytes,encoding);
+                  
+                  position += len;
+                }
+              } catch (e) {
+                console.error('编码处理错误:', e);
+                td.textContent = '编码错误';
+              }
+            } else {
+              // 按字符分割
+              td.textContent = remainingMsg.substring(0, len);
+              remainingMsg = remainingMsg.substring(len);
+            }
+            
+            row.appendChild(td);
+          }
+          
+          resultTable.appendChild(row);
+        });
+        
+        // 自动调整列宽
+        autoResizeColumns();
+      });
+      
+      // 自动调整列宽函数
+      function autoResizeColumns() {
+        const rows = resultTable.rows;
+        if (rows.length === 0) return;
+        
+        const columnCount = rows[0].cells.length;
+        
+        // 找到每列内容的最大长度
+        const maxContentLengths = [];
+        for (let col = 0; col < columnCount; col++) {
+          let maxLength = rows[0].cells[col].textContent.length; // 标题长度
+          
+          for (let row = 1; row < rows.length; row++) {
+            if (col < rows[row].cells.length) {
+              const cellContent = rows[row].cells[col].textContent;
+              maxLength = Math.max(maxLength, cellContent.length);
+            }
+          }
+          
+          maxContentLengths.push(maxLength);
+        }
+        
+        // 设置列宽
+        for (let col = 0; col < columnCount; col++) {
+          const minWidth = Math.max(50, maxContentLengths[col] * 8);
+          
+          for (let row = 0; row < rows.length; row++) {
+            if (col < rows[row].cells.length) {
+              rows[row].cells[col].style.minWidth = `${minWidth}px`;
+            }
+          }
+        }
+      }
+      
+      // 示例数据
+      messagesInput.value = `ABC12345678901234567ABCDEF123
+DEF45GHIJKLMNO9876543210MNOPQR
+GHIJKL1122334455STUVWXYZ9876543`;
+    });
+  </script>
+</body>
+</html>
