@@ -1,0 +1,1 @@
+http://192.168.100.238/svn/acssvn/Control/dev/Project R & D/PRL/01.主干版本/2021/ACS_5.0.6_SYSSPLIT_20210531001.r/src/core/fundacc/com.yss.acs.fundacc.rule

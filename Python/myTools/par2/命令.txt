@@ -1,0 +1,7 @@
+﻿par2j c /uo /rr10 /rf1  /d"F:\book\not e" "I:\p\not e\no te.rar.par2" "no te.rar"
+
+
+par2j v /uo /d"H:\f\Collections2\cos\lenfried\[Heruheru3(lenfried)]lenfriedom type-S3" "I:\p\Collections2\cos\lenfried\[Heruheru3(lenfried)]lenfriedom type-S3\lenfriedom type-S3.mov.par2"
+
+
+par2j r "/dH:\f\Collections\Anime_1" "I:\p\Collections\Anime_1\[Moozzi2] RWBY Season1 - TV + SP.rar.par2"

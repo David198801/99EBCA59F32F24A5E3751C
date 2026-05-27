@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON/JS 格式化工具</title>
+    <style>
+        .container { margin: 20px; font-family: Arial }
+        textarea { 
+            width: 90%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #error { color: red; margin: 10px 0; }
+    </style>
+    <script src="./lib/js-beautify/beautify-1.14.7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h3>JS、JSON格式化工具</h3>
+        <select id="formatType" onchange="handleModeChange()">
+			<option value="js" selected>JS格式化</option>
+            <option value="json">JSON格式化</option>
+        </select>
+		<hr/>
+        <button onclick="format()">格式化</button>
+        <button onclick="compress()">压缩</button>
+        <button onclick="copyToClipboard()">复制结果</button>
+		<hr/>
+        <div id="error"></div>
+        <textarea id="input" placeholder="请输入内容..."></textarea>
+        <textarea id="output" readonly></textarea>
+    </div>
+
+    <script>
+        let currentMode = '';
+		handleModeChange()
+
+        function handleModeChange() {
+            currentMode = document.getElementById('formatType').value;
+            document.getElementById('input').placeholder = 
+                currentMode === 'json' ? "请输入JSON字符串..." : "请输入JavaScript代码...";
+        }
+
+        function format() {
+            try {
+                const input = document.getElementById('input').value;
+                let result = '';
+                
+                if(currentMode === 'json') {
+                    const parsed = JSON.parse(input);
+                    result = JSON.stringify(parsed, null, 2); // [2,4](@ref)
+                } else {
+                    result = js_beautify(input, { // [5](@ref)
+                        indent_size: 2,
+                        brace_style: 'collapse',
+                        space_in_empty_paren: true
+                    });
+                }
+                showResult(result);
+				copyToClipboard();
+            } catch (e) {
+                showError(`格式错误：${e.message}`);
+            }
+        }
+
+        function compress() {
+            try {
+                const input = document.getElementById('input').value;
+                let result = input;
+                
+                if(currentMode === 'json') {
+                    result = JSON.stringify(JSON.parse(input)); // [2](@ref)
+                } else {
+                    // 移除注释和空格的压缩逻辑
+                    result = input
+                        .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '') // 移除注释
+                        .replace(/\s+/g, ' '); // 压缩空格
+                }
+                showResult(result);
+				copyToClipboard();
+            } catch (e) {
+                showError(`压缩错误：${e.message}`);
+            }
+        }
+
+        function showResult(text) {
+            document.getElementById('output').value = text;
+            document.getElementById('error').innerHTML = '';
+        }
+
+        function showError(msg) {
+            document.getElementById('error').innerHTML = msg;
+            document.getElementById('output').value = '';
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            //alert('已复制到剪贴板');
+        }
+    </script>
+</body>
+</html>

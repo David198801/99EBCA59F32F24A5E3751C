@@ -1,0 +1,272 @@
+[
+	{
+        "description": "test",
+        "request": {
+            "uri": "/firmbank/online/PFCFoxSecurities",
+            "method": "POST",
+			"headers": {
+                "Content-Type": "text/xml; charset=GB18030"
+            }
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/xml"
+            },
+            "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n\n<QFUNDACCTINFOTRNRQ>\n  <TRNUID>2021111500000020</TRNUID>\n  <RQBODY>\n    <ACCTNO>6666111166662222</ACCTNO>\n    <FUNDACCTNO>8888888888888888</FUNDACCTNO>\n    <PWD>123456</PWD>\n  </RQBODY>\n</QFUNDACCTINFOTRNRQ>\n"
+        }
+    },
+	{
+        "description": "ajax",
+        "request": {
+            "uri": "/test/user",
+            "method": "GET"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json",
+				"Access-Control-Allow-Origin":"*"
+            },
+            "text": "{\"userName\":\"lihua\"}"
+        }
+    },
+	{
+        "description": "chongqing",
+        "request": {
+            "uri": "/advanceCase/advanceCaseStatus",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "000000",
+			        "rtnMsg": "成功",
+			        "rtnRsn": "",
+			        "caseNo": "",
+			        "caseStatus": "",
+			        "lastUpdtUser": "",
+			        "lastUpdtTm": "",
+			        "LIST_PAYMENT": [
+			            {
+			                "payNo": "2019082100000040",
+			                "payStatus": "09",
+			                "apvComment": "",
+			                "payDate": "",
+			                "paySeqNo": "",
+			                "payRtnCode": "",
+			                "payRtnMsg": "",
+			                "payFailRsn": "",
+			                "payFnshTm": "",
+			                "lastUpdtUser": "",
+			                "lastUpdtTm": ""
+			            }
+			        ]
+			    }
+			}
+        }
+    },
+	{
+        "description": "chongqing2",
+        "request": {
+            "uri": "/advanceCase/recvAdvanceCaseByYSS",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "000000",
+			        "rtnMsg": "成功",
+			        "rtnRsn": ""
+			    }
+			}
+        }
+    },
+	{
+        "description": "推送产品代码",
+        "request": {
+            "uri": "/pms/pdtcenter/market/valuation",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "000000",
+			        "rtnMsg": "成功",
+			        "rtnRsn": ""
+			    }
+			}
+        }
+    },
+	{
+        "description": "产品建账完成",
+        "request": {
+            "uri": "/pms/pdtcenter/online/valuation",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "000000",
+			        "rtnMsg": "成功",
+			        "rtnRsn": ""
+			    }
+			}
+        }
+    },
+	{
+        "description": "跳转",
+        "request": {
+            "uri": "/turn"
+        },
+        "redirectTo" : "http://127.0.0.1:8088/sofa/sofa-portal/index.jsp?ICMS_SSO_USER_TOKEN=aaa"
+    },
+	{
+        "description": "证券资金台账账户余额",
+        "request": {
+            "uri": "/cps/yss/AccountBalanceQuery",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "111111",
+			        "rtnMsg": "失败",
+			        "rtnRsn": "",
+					"data": "9999"
+			    }
+			}
+        }
+    },
+	{
+        "description": "银证明细流水",
+        "request": {
+            "uri": "/cps/yss/AccountTradeQuery",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "application/json;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "json": {
+			    "head": {
+			        "reqNo": "20220117195150000001",
+			        "reqDate": "20220117",
+			        "reqTime": "195250",
+			        "reqSys": "ZY"
+			    },
+			    "param": {
+			        "rtnCode": "000000",
+			        "rtnMsg": "成功",
+			        "rtnRsn": "",
+					"LIST_PAYMENT": [
+						{
+							"currencyAbbr": "RMB",
+							"tranChannel": "新代理第三方存管",
+							"transType": "银转证",
+							"accNo": "6666777788880001",
+							"tranDate": "20230303",
+							"tranAmount": "0000000012610"
+						},
+						{
+							"currencyAbbr": "RMB",
+							"tranChannel": "新代理第三方存管",
+							"transType": "银转证",
+							"accNo": "6666777788880001",
+							"tranDate": "20230303",
+							"tranAmount": "0000000012630"
+						}
+					]
+			    }
+			}
+        }
+    },
+	{
+        "description": "核心账户信息",
+        "request": {
+            "uri": "/services/160028",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "text/xml;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "file": "D:\\P\\moco\\160028.xml"
+        }
+    },
+	{
+        "description": "核心流水",
+        "request": {
+            "uri": "/services/160029",
+            "method": "POST"
+			
+        },
+        "response": {
+			"headers": {
+                "Content-Type": "text/xml;charset=UTF-8",
+				"Access-Control-Allow-Origin":"*"
+            },
+           "file": "D:\\P\\moco\\160029.xml"
+        }
+    }
+	
+]

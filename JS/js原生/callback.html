@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+<script>
+(function () {
+    var name="外部变量知道的值";
+    function say(value) {
+        name=value;     //改变外部变量
+    }
+    function execute (callback, value) { 
+        (function(){callback(value); //回调函数专
+        })()
+        
+    } 
+    function show(){
+        execute(say, '改变成功'); //将say函数当作参数传入
+        console.log(name);            //验证外部变量是属否被回调函数改变？
+    }
+    show()
+})()
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+
+  <p>第1个p标签</p>
+  <p>第2个p标签</p>
+  <h1 class="firstH1class">第1个h1标签</h1>
+  <h1 id="secondH1id">第2个h1标签</h1>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("p").css("color", "red");
+      $("h1.firstH1class").css("color", "rgb(0,255,0)");
+      $("#secondH1id").css("color", "#66ccff")
+    })
+  </script>
+</body>
+
+</html>

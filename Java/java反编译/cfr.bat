@@ -1,0 +1,1 @@
+java -jar cfr-0.152.jar intelligent-extraction-job-engine-server.jar --outputdir out

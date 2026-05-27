@@ -1,0 +1,1 @@
+rd /s /Q X:\server\

@@ -1,0 +1,3 @@
+D:\sofadev\jdk\jdk1.8.0_172
+D:\P\ibm-semeru-open-jdk_x64_windows_17.0.7_7_openj9-0.38.0
+D:\P\ibm-semeru-open-jdk_x64_windows_8u372b07_openj9-0.38.0

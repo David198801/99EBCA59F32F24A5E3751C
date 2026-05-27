@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <button id="button1">选取子span元素</button>
+  <button id="button2">选取后代span元素</button>
+  <div>div元素
+    <span>span元素</span>
+    <h5>h5元素</h4>
+      <p>p元素<span>p span元素</span>p元素</p>
+      <span>span元素</span>
+      div元素
+  </div>
+  <script>
+    $(function () {
+      $("#button1").click(function () {
+        //重置所有元素 
+        $("*").css("color", "");
+        //选取子元素
+        $("div > span").css("color", "red");
+      })
+      $("#button2").click(function () {
+        //重置所有元素 
+        $("*").css("color", "");
+        //选取后代元素
+        $("div span").css("color", "red");
+      })
+
+    })
+  </script>
+</body>
+
+</html>

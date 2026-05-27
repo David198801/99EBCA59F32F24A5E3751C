@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <h4>一个无序列表：</h4>
+  <ul>
+    <li>第0行</li>
+    <li>第1行</li>
+    <li>第2行</li>
+    <li>第3行</li>
+    <li>第4行</li>
+    <li>第5行</li>
+  </ul>
+  <script>
+    $(function () {
+      $("li:even").css("color", "red");
+      $("li:odd").css("color", "blue");
+    })
+  </script>
+</body>
+
+</html>

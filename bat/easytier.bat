@@ -1,0 +1,1 @@
+easytier-core.exe -d --network-name mynet198609 --network-secret mynet198609 -p tcp://et1.fuis.top:11010

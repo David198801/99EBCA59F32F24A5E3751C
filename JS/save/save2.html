@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+<body>
+
+
+<button id="save" type="button">保存</button>
+<script type="text/javascript">
+
+var s = "aaaaaa";
+ 
+　　document.querySelector('#save').addEventListener('click', saveFile);
+
+　　function exportRaw(name, data) {
+　　　　var urlObject = window.URL || window.webkitURL || window.mozURL || window.msURL;
+　　　　var export_blob = new Blob([data]);
+　　　　var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+　　　　save_link.href = urlObject.createObjectURL(export_blob);
+　　　　save_link.download = name;
+        save_link.click();    //指定页面自动下载文件
+
+　　}
+
+　　function saveFile(){
+　　　　var inValue  = s;
+　　　　exportRaw('test.txt', inValue);
+　　}
+ 
+</script>
+</body>
+</html>

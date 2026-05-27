@@ -1,0 +1,3 @@
+https://ipfs.io/ipfs/bafybeieusdelus2bri2dyoqze7izui3slhu4vm6bw4jje2ycekeuaivhbi?filename=model_soyo.pt
+https://ipfs.io/ipfs/bafkreide4xjak32li2nupbavuog2qvea45pru7z2vgr3rlboupzil3tw4e?filename=b.jpg
+https://ipfs.io/ipfs/bafybeiciajubmwyiqbx6bqbyrts6v3kvq3uyznxpuqvp522hzd5buxt6em?filename=a.jpg

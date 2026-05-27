@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+<p id="p1">p<span>span1</span>p<span>span2</span>p</p>
+<p id="p2">p<span>span1</span>p<span>span2</span>p</p>
+
+  <script>
+    $(function () {
+      $("#p1 span").css("color","red");
+      $("#p2 > span:last").css("color","red")
+
+    })
+  </script>
+</body>
+
+</html>

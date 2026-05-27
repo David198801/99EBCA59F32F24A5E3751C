@@ -1,0 +1,17 @@
+D:\yss\split001_suzhou_zy\common\com.yss.acs.interface\src\main\java\com\yss\acs\api\parameters\service\ProductService.java
+D:\yss\split001_suzhou_zy\common\com.yss.acs.interface\src\main\java\com\yss\acs\common\util\StringUtil.java
+D:\yss\split001_suzhou_zy\common\com.yss.acs.parameters\src\main\java\com\yss\acs\parameters\product\biz\ProductBO.java
+D:\yss\split001_suzhou_zy\common\com.yss.acs.parameters\src\main\java\com\yss\acs\parameters\product\biz\ProductExtendSubBO.java
+D:\yss\split001_suzhou_zy\common\com.yss.acs.parameters\src\main\java\com\yss\acs\parameters\product\service\ProductServiceImpl.java
+D:\yss\split001_suzhou_zy\doc\reportTemplate\ORACLE\客户报表\苏州银行\产品规模表.xlsx
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\client\vo\ProductFoundReq.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchCommand.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchProduct.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchReport.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchSecurityAccount.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchUpdateProduct.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\DispatchUpdateSecurityAccount.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\vo\UpdateProductReq.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\dispatch\vo\UpdateSecurityAccountReq.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\server\EsdZYServer.java
+D:\yss\split001_suzhou_zy\support\com.yss.acs.esd.zy\src\main\java\com\yss\acs\esd\zy\service\EsdServiceImpl.java

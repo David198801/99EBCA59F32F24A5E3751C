@@ -1,0 +1,1 @@
+java -jar -Dfile.encoding=UTF-8 moco-runner-1.3.0-standalone.jar http -p 9090 -c moco.json

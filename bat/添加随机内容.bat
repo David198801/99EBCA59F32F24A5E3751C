@@ -1,0 +1,1 @@
+for %%i in (%*) do echo g58%random%mf%random%vjs1m0h9%random%gnik95oe>>%%i

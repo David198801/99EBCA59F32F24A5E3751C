@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+<head>
+<script type="text/javascript">
+
+function exportRaw(name, data) {
+　　　　var urlObject = window.URL || window.webkitURL || window.mozURL || window.msURL;
+　　　　var export_blob = new Blob([data]);
+　　　　var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+　　　　save_link.href = urlObject.createObjectURL(export_blob);
+　　　　save_link.download = name;
+        save_link.click();
+
+　　}
+
+
+function download(){
+var fileName = "test.txt"
+var text = document.getElementById("myd").textContent;
+exportRaw(fileName ,text)
+}
+
+function loadXMLDoc(url)
+{
+	var xmlhttp;
+
+	xmlhttp=new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+      var responseDoc = (new DOMParser()).parseFromString(xmlhttp.responseText,'text/html');
+      var responseBody = responseDoc.body;
+			document.getElementById("myd").innerHTML=responseBody.innerHTML;
+			
+		}
+	}
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+}
+
+
+function replace(){
+var url = "http://q6woe9qyt.bkt.clouddn.com/test.html";
+loadXMLDoc(url);
+var btn=document.createElement("BUTTON");
+var t=document.createTextNode("下载txt");
+btn.onclick = download;
+btn.appendChild(t);
+document.body.appendChild(btn);
+}
+
+
+</script>
+</head>
+<body>
+<div id="myd">未替换文本</p>
+
+<button type="button" onclick="replace()">修改内容</button>
+</body>
+</html>

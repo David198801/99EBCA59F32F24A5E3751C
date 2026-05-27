@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML/XML格式化工具</title>
+    <script src="./lib/js-beautify/beautify-1.14.7.min.js"></script>
+    <script src="./lib/js-beautify/beautify-html-1.14.7.min.js"></script>
+    <style>
+        .container { width: 90%; margin: 20px auto }
+        #output { background: #f5f5f5; padding: 10px; white-space: pre-wrap }
+        .format-options { margin: 10px 0 }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>HTML/XML格式化工具</h3>
+        <div class="format-options">
+            <select id="formatType">
+                <option value="html">HTML</option>
+                <option value="xml">XML</option>
+            </select>
+        </div>
+        <textarea id="input" rows="8" placeholder="粘贴HTML/XML代码..." style="width: 100%"></textarea>
+        <button onclick="formatCode()">格式化</button>
+        <hr/>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        function formatCode() {
+            const input = document.getElementById('input').value;
+            const formatType = document.getElementById('formatType').value;
+            let formatted = '';
+
+            if (formatType === 'html') {
+                // 使用html-beautify处理HTML及内联CSS/JS[6,10](@ref)
+                formatted = html_beautify(input, {
+                    indent_size: 4,
+                    indent_inner_html: true,
+                    unformatted: [],
+                    extra_liners: [],
+                    wrap_line_length: 120,
+                    js: {
+                        indent_size: 2  // JS部分单独缩进规则
+                    },
+                    css: {
+                        indent_size: 2  // CSS部分单独缩进规则
+                    }
+                });
+            } else {
+                // XML格式化处理[3](@ref)
+                formatted = html_beautify(input, {
+                    indent_size: 2,
+                    indent_char: ' ',
+                    max_char: 0,
+                    unformatted: [],
+                    wrap_attributes: 'force-expand-multiline'
+                });
+            }
+            
+            const output = document.getElementById('output');
+            output.textContent = formatted;
+            copyToClipboard(output);
+        }
+
+        function copyToClipboard(ele) {
+            const range = document.createRange();
+            range.selectNode(ele);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            //alert("已复制到剪贴板！");
+        }
+    </script>
+</body>
+</html>

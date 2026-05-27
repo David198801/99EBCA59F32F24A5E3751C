@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<html>
+
+<head>
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <p id="p1" onclick='alert("自动点击")'>点击会有提示</p>
+  <br><br><br>
+  <p id="p2">点击会有提示</p>
+  <br><br><br>
+  <p id="p3">双击会有提示</p>
+  <script type="text/javascript">
+    $(function () {
+      //触发被选元素的 click 事件
+      //$(selector).click()
+      $("#p1").click();
+      function myClick() {
+        alert("click()/dblclick()传入函数的点击");
+      }
+      //添加函数到 click 事件
+      //$(selector).click(function)
+      $("#p2").click(myClick);
+      //双击同理可用两种方式
+      //添加函数到 dblclick 事件
+      $("#p3").dblclick(myClick);
+    })
+  </script>
+</body>
+
+</html>

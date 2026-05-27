@@ -1,0 +1,543 @@
+{
+  "version" : "0.5.0",
+  "columns" : [ {
+    "field" : "A",
+    "width" : 248,
+    "editAble" : true,
+    "columnIndex" : 1,
+    "align" : "center",
+    "dataBind" : "A",
+    "title" : "A"
+  }, {
+    "field" : "B",
+    "width" : 334,
+    "editAble" : true,
+    "columnIndex" : 2,
+    "align" : "center",
+    "dataBind" : "B",
+    "title" : "B"
+  }, {
+    "field" : "C",
+    "width" : 458,
+    "editAble" : true,
+    "columnIndex" : 3,
+    "align" : "center",
+    "dataBind" : "C",
+    "title" : "C"
+  } ],
+  "rows" : [ {
+    "_Raven_AutoKey" : "_auto_51",
+    "A" : "利润分配表"
+  }, {
+    "_Raven_AutoKey" : "_auto_50"
+  }, {
+    "_Raven_AutoKey" : "_auto_0",
+    "A" : "项目",
+    "B" : "本期",
+    "C" : "上年度可比区间"
+  }, {
+    "_Raven_AutoKey" : "_auto_1",
+    "A" : "一、营业总收入",
+    "B" : "=B5+B12+B22+B23+B24",
+    "C" : "=C5+C12+C22+C23+C24"
+  }, {
+    "_Raven_AutoKey" : "_auto_2",
+    "A" : "1.利息收入",
+    "B" : "$fs(''6011'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6011'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_3",
+    "A" : "其中：存款利息收入",
+    "B" : "$fs(''601101'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''601101'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_4",
+    "A" : "           债券利息收入",
+    "B" : "$fs(''601106'',''D'', Sdate, Edate, ProductId) +$fs(''60119902'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''601106'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) +$fs(''60119902'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_5",
+    "A" : "           资产支持证券利息收入",
+    "B" : "$fs(''601107'',''D'', Sdate, Edate, ProductId) +$fs(''60119906'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''601107'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) +$fs(''60119906'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_6",
+    "A" : "           买入返售金融资产收入",
+    "B" : "$fs(''601108'',''D'', Sdate, Edate, ProductId)+$fs(''60119903'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''601108'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)+$fs(''60119903'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_54",
+    "A" : "           证券出借利息收入",
+    "B" : "$fs(''601121'',''D'', Sdate, Edate, ProductId)+$fs(''60119901'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''601121'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)+$fs(''60119901'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_53",
+    "A" : "           其他利息收入",
+    "B" : "=B5-SUM(B6:B10)",
+    "C" : "=C5-SUM(C6:C10)"
+  }, {
+    "_Raven_AutoKey" : "_auto_7",
+    "A" : "2.投资收益（损失以\"-\"填列）",
+    "B" : "$fs(''6111'',''D'', Sdate, Edate, ProductId)+$fs4tzfl(''6011'',''D'', Sdate, Edate, ProductId,''TZFL01'') -$fs(''6407'',''J'', Sdate, Edate, ProductId) -$fsByBusType(''6111'',''D'', Sdate, Edate,''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02,TZFL03'')",
+    "C" : "$fs(''6111'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs4tzfl(''6011'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'')-$fs(''6407'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fsByBusType(''6111'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02,TZFL03'')"
+  }, {
+    "_Raven_AutoKey" : "_auto_8",
+    "A" : "其中：股票投资收益",
+    "B" : "$fs(''611101'',''D'', Sdate, Edate, ProductId)+$fs(''611102'',''D'', Sdate, Edate, ProductId)-$fs(''64070101'',''J'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''611101'',''D'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)+$fs(''611102'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fs(''64070101'',''J'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_55",
+    "A" : "           基金投资收益",
+    "B" : "$fs(''611105'',''D'', Sdate, Edate, ProductId)+$fs(''611106'',''D'', Sdate, Edate, ProductId)-$fs(''64070104'',''J'', Sdate, Edate, ProductId)+$fs(''61119904'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''611105'',''D'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)+$fs(''611106'',''D'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)-$fs(''64070104'',''J'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)+$fs(''61119904'',''D'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_9",
+    "A" : "           债券投资收益",
+    "B" : "$itemCodeFsTzflBybusTypeAndItemCode(''6111_ZQ'','''','''',''D'', Sdate,Edate, ProductId,''ZQ'',''TZFL01'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL03'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL04'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL_CQGQTZCBF'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL05'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL06'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''--'')+$itemCodeFsTzflBybusTypeAndItemCode(''6011_ZQ'','''','''',''D'', Sdate,Edate, ProductId,''ZQ'',''TZFL01'')-$fs4tzfl(''601107'',''D'',Sdate,Edate,ProductId,''TZFL01'')-$itemCodeFsTzflBybusTypeAndItemCode(''64070102'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZQ'',''TZFL01'')-$fsByBusType(''6111'',''D'', Sdate, Edate,''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')+$fsByBusType(''611103'',''D'', Sdate, Edate,''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')+$fsByBusType(''611104'',''D'', Sdate, Edate,''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZQ'',''TZFL01'')+$getFseByZqlx('''',''J'',Sdate,Edate,ProductId,'''',''ZQ_ZCZCZQ'',''6407_YHJZQ'')+$fs(''61119909'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$itemCodeFsTzflBybusTypeAndItemCode(''6111_ZQ'','''','''',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ'',''TZFL01'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL03'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL04'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL_CQGQTZCBF'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL05'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL06'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''--'')+$itemCodeFsTzflBybusTypeAndItemCode(''6011_ZQ'','''','''',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ'',''TZFL01'')-$fs4tzfl(''601107'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'')-$itemCodeFsTzflBybusTypeAndItemCode(''64070102'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ'',''TZFL01'')-$fsByBusType(''6111'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')+$fsByBusType(''611103'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')+$fsByBusType(''611104'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ'',''TZFL01'')+$getFseByZqlx('''',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,'''',''ZQ_ZCZCZQ'',''6407_YHJZQ'')+$fs(''61119909'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_10",
+    "A" : "           资产支持证券投资收益",
+    "B" : "$itemCodeFsTzflBybusTypeAndItemCode(''6111_ZQ'','''','''',''D'', Sdate,Edate, ProductId,''ZCZCZQ'',''TZFL01'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL03'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL04'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL_CQGQTZCBF'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL05'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''TZFL06'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',Sdate,Edate,ProductId,''--'')+$getFseByZqlx('''',''D'',Sdate,Edate,ProductId,''TZFL01'',''ZQ_ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',Sdate,Edate,ProductId,''TZFL01'',''ZQ_ZCZCZQ_DHS'',''6011_ZQ'')+$getFseByZqlx('''',''D'',Sdate,Edate,ProductId,''TZFL01'',''ZQ_XZ_ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',Sdate,Edate,ProductId,''TZFL01'',''ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',Sdate,Edate,ProductId,''TZFL01'',''ZQ_ZCZCPJ'',''6011_ZQ'')-$itemCodeFsTzflBybusTypeAndItemCode(''64070102'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZCZCZQ'',''TZFL01'')-$fsByBusType(''611103'',''D'', Sdate, Edate,''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$fsByBusType(''611104'',''D'', Sdate, Edate,''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZQ_ZCZCZQ'',''TZFL01'')+$fs(''61119912'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$itemCodeFsTzflBybusTypeAndItemCode(''6111_ZQ'','''','''',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZCZCZQ'',''TZFL01'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL03'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL04'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL_CQGQTZCBF'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL05'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL06'')+$itemCodeFsTzfl(''6111_ZQ'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''--'')+$getFseByZqlx('''',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'',''ZQ_ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'',''ZQ_ZCZCZQ_DHS'',''6011_ZQ'')+$getFseByZqlx('''',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'',''ZQ_XZ_ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'',''ZCZCZQ'',''6011_ZQ'')+$getFseByZqlx('''',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId,''TZFL01'',''ZQ_ZCZCPJ'',''6011_ZQ'')-$itemCodeFsTzflBybusTypeAndItemCode(''64070102'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZCZCZQ'',''TZFL01'')-$fsByBusType(''611103'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$fsByBusType(''611104'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQHB,QY_ZQDF,ZQ_ZCJY_HS_ZJDZ,ZQ_SH'',ProductId,''TZFL03'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ_ZCZCZQ'',''TZFL01'')+$fs(''61119912'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_11",
+    "A" : "           贵金属投资收益",
+    "B" : "$fs(''611123'',''D'',Sdate,Edate,ProductId)+$fs(''611124'',''D'',Sdate,Edate,ProductId)-$fs(''64070116'',''J'',Sdate,Edate,ProductId)-$fs(''64070119'',''J'',Sdate,Edate,ProductId)",
+    "C" : "$fs(''611123'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs(''611124'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fs(''64070116'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fs(''64070119'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_13",
+    "A" : "           衍生工具收益",
+    "B" : "$fs(''611121'',''D'',Sdate,Edate,ProductId)+$fs(''611117'',''D'',Sdate,Edate,ProductId)+$fs(''611129'',''D'',Sdate,Edate,ProductId)+$fs(''611190'',''D'',Sdate,Edate,ProductId)-$fs(''64070111'',''J'',Sdate,Edate,ProductId)-$fs(''64070125'',''J'',Sdate,Edate,ProductId)+$fs(''61119906'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''611121'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs(''611117'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs(''611129'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs(''611190'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fs(''64070111'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fs(''64070125'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)+$fs(''61119906'',''D'',$lastYearDate(Sdate), $lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_14",
+    "A" : "           股利收益",
+    "B" : "$fs(''611125'',''D'', Sdate, Edate, ProductId)+$fs(''611126'',''D'', Sdate, Edate, ProductId)+$fs(''611110'',''D'', Sdate, Edate, ProductId)+$fs(''611111'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''611125'',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId)+$fs(''611126'',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId)+$fs(''611110'',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId)+$fs(''611111'',''D'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_56",
+    "A" : "           以摊余成本计量的金融资产终止确认产生的收益（若有）",
+    "B" : "$fs4tzfl(''6111'',''D'', Sdate, Edate, ProductId,''TZFL02'')-$fsByBusType(''6111'',''D'', Sdate, Edate,''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZQ'',''TZFL02'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', Sdate,Edate, ProductId,''ZCZCZQ'',''TZFL02'')",
+    "C" : "$fs4tzfl(''6111'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate), ProductId,''TZFL02'')-$fsByBusType(''6111'',''D'', $lastYearDate(Sdate), $lastYearDate(Edate),''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZQ'',''TZFL02'')-$itemCodeFsTzflBybusTypeAndItemCode(''6407_YHJZQ'',''1103_ZQ_CB'','''',''J'', $lastYearDate(Sdate),$lastYearDate(Edate), ProductId,''ZCZCZQ'',''TZFL02'')"
+  }, {
+    "_Raven_AutoKey" : "_auto_57",
+    "A" : "           其他投资收益",
+    "B" : "=B12-SUM(B13:B20)",
+    "C" : "=C12-SUM(C13:C20)"
+  }, {
+    "_Raven_AutoKey" : "_auto_15",
+    "A" : "3.公允价值变动损益（损失以\"-\"填列）",
+    "B" : "$fs(''6101'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6101'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_16",
+    "A" : "4.汇兑收益（损失以\"-\"号填列）",
+    "B" : "$fs(''6061'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6061'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_58",
+    "A" : "5.其他收入（损失以“-”号填列）",
+    "B" : "$fs(''6302'',''D'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6302'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_17",
+    "A" : "减：二、营业总支出",
+    "B" : "=sum(B26:B34)-B31",
+    "C" : "=sum(C26:C34)-C31"
+  }, {
+    "_Raven_AutoKey" : "_auto_18",
+    "A" : "1.管理人报酬",
+    "B" : "$fs(''6403'',''J'', Sdate, Edate, ProductId) -$fs(''640303'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6403'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) -$fs(''640303'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_19",
+    "A" : "2.托管费",
+    "B" : "$fs(''6404'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6404'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_20",
+    "A" : "3.销售服务费",
+    "B" : "$fs(''6406'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6406'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_21",
+    "A" : "4.投资顾问费",
+    "B" : "$fs(''640303'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''640303'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_22",
+    "A" : "5.利息支出",
+    "B" : "$fs(''6411'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6411'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_23",
+    "A" : "其中：卖出回购金融资产支出",
+    "B" : "$fs(''641101'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''641101'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_52",
+    "A" : "6.信用减值损失",
+    "B" : "$fs(''6702'',''J'', Sdate, Edate, ProductId) -$fsByBusType(''6111'',''D'', Sdate, Edate,''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02,TZFL03'')",
+    "C" : "$fs(''6702'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate),ProductId)-$fsByBusType(''6111'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate),''QY_ZQDF,ZQ_SH,ZQ_HS_ZJDZ,ZQ_ZCJY_HS_ZJDZ,QY_ZQHB,QY_FBHBPX,QY_FBDF'',ProductId,''TZFL02,TZFL03'')"
+  }, {
+    "_Raven_AutoKey" : "_auto_24",
+    "A" : "7.税金及附加",
+    "B" : "$fs(''6802'',''J'', Sdate, Edate, ProductId) ",
+    "C" : "$fs(''6802'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_59",
+    "A" : "8.其他费用",
+    "B" : "$fs(''6605'',''J'', Sdate, Edate, ProductId)+$fs(''6405'',''J'', Sdate, Edate, ProductId)+$fs(''6606'',''J'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''6605'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId)+$fs(''6405'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId)+$fs(''6606'',''J'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId) "
+  }, {
+    "_Raven_AutoKey" : "_auto_60",
+    "A" : "三、 利润总额（亏损总额以\"-“号填列）",
+    "B" : "=B4-B25",
+    "C" : "=C4-C25"
+  }, {
+    "_Raven_AutoKey" : "_auto_62",
+    "A" : "减：所得税费用",
+    "B" : "0",
+    "C" : "0"
+  }, {
+    "_Raven_AutoKey" : "_auto_61",
+    "A" : "四、净利润（净亏损以”-“号填列）",
+    "B" : "=B35-B36",
+    "C" : "=C35-C36"
+  }, {
+    "_Raven_AutoKey" : "_auto_63",
+    "A" : "五、其他综合收益的税后净额",
+    "B" : "$fs(''4003'',''D'', Sdate, Edate, ProductId)",
+    "C" : "$fs(''4003'',''D'',$lastYearDate(Sdate),$lastYearDate(Edate), ProductId)"
+  }, {
+    "_Raven_AutoKey" : "_auto_64",
+    "A" : "六、综合收益总额",
+    "B" : "=B37+B38",
+    "C" : "=C37+C38"
+  } ],
+  "key2RowIndex" : {
+    "_auto_51" : 0,
+    "_auto_50" : 1,
+    "_auto_0" : 2,
+    "_auto_1" : 3,
+    "_auto_2" : 4,
+    "_auto_3" : 5,
+    "_auto_4" : 6,
+    "_auto_5" : 7,
+    "_auto_6" : 8,
+    "_auto_54" : 9,
+    "_auto_53" : 10,
+    "_auto_7" : 11,
+    "_auto_8" : 12,
+    "_auto_55" : 13,
+    "_auto_9" : 14,
+    "_auto_10" : 15,
+    "_auto_11" : 16,
+    "_auto_13" : 17,
+    "_auto_14" : 18,
+    "_auto_56" : 19,
+    "_auto_57" : 20,
+    "_auto_15" : 21,
+    "_auto_16" : 22,
+    "_auto_58" : 23,
+    "_auto_17" : 24,
+    "_auto_18" : 25,
+    "_auto_19" : 26,
+    "_auto_20" : 27,
+    "_auto_21" : 28,
+    "_auto_22" : 29,
+    "_auto_23" : 30,
+    "_auto_52" : 31,
+    "_auto_24" : 32,
+    "_auto_59" : 33,
+    "_auto_60" : 34,
+    "_auto_62" : 35,
+    "_auto_61" : 36,
+    "_auto_63" : 37,
+    "_auto_64" : 38
+  },
+  "nowRowIndex2realyRowIndex" : {
+    "0" : 0,
+    "1" : 1,
+    "2" : 2,
+    "3" : 3,
+    "4" : 4,
+    "5" : 5,
+    "6" : 6,
+    "7" : 7,
+    "8" : 8,
+    "9" : 9,
+    "10" : 10,
+    "11" : 11,
+    "12" : 12,
+    "13" : 13,
+    "14" : 14,
+    "15" : 15,
+    "16" : 16,
+    "17" : 17,
+    "18" : 18,
+    "19" : 19,
+    "20" : 20,
+    "21" : 21,
+    "22" : 22,
+    "23" : 23,
+    "24" : 24,
+    "25" : 25,
+    "26" : 26,
+    "27" : 27,
+    "28" : 28,
+    "29" : 29,
+    "30" : 30,
+    "31" : 31,
+    "32" : 32,
+    "33" : 33,
+    "34" : 34,
+    "35" : 35,
+    "36" : 36,
+    "37" : 37,
+    "38" : 38
+  },
+  "cellSpan" : [ {
+    "start" : [ 0, 1 ],
+    "end" : [ 1, 3 ]
+  } ],
+  "func" : {
+    "_auto_1" : {
+      "B" : "=B5+B12+B22+B23+B24",
+      "C" : "=C5+C12+C22+C23+C24"
+    },
+    "_auto_17" : {
+      "B" : "=sum(B26:B34)-B31",
+      "C" : "=sum(C26:C34)-C31"
+    },
+    "_auto_60" : {
+      "B" : "=B4-B25",
+      "C" : "=C4-C25"
+    },
+    "_auto_61" : {
+      "B" : "=B35-B36",
+      "C" : "=C35-C36"
+    },
+    "_auto_53" : {
+      "B" : "=B5-SUM(B6:B10)",
+      "C" : "=C5-SUM(C6:C10)"
+    },
+    "_auto_57" : {
+      "B" : "=B12-SUM(B13:B20)",
+      "C" : "=C12-SUM(C13:C20)"
+    },
+    "_auto_64" : {
+      "B" : "=B37+B38",
+      "C" : "=C37+C38"
+    }
+  },
+  "stepInfo" : {
+    "step" : 68,
+    "styleStep" : 156,
+    "excelStep" : 1,
+    "idx" : 64
+  },
+  "selRangeStyle" : {
+    "0,1,1,3" : {
+      "style" : {
+        "font-weight" : "bolder"
+      },
+      "step" : 136
+    },
+    "3,1,3,1" : {
+      "style" : {
+        "text-align" : "left",
+        "font-weight" : "bold"
+      },
+      "step" : 147,
+      "oldStep" : 134
+    },
+    "3,3,3,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 153
+    },
+    "31,1,31,1" : {
+      "style" : {
+        "text-align" : "left"
+      },
+      "step" : 137,
+      "oldStep" : 134
+    },
+    "31,3,31,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 150
+    },
+    "20,3,20,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 155
+    },
+    "10,3,10,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 154
+    },
+    "34,1,34,1" : {
+      "style" : {
+        "text-align" : "left",
+        "font-weight" : "bold"
+      },
+      "step" : 144,
+      "oldStep" : 141
+    },
+    "35,1,35,1" : {
+      "style" : {
+        "text-align" : "left"
+      },
+      "step" : 143,
+      "oldStep" : 134
+    },
+    "13,1,13,1" : {
+      "style" : {
+        "text-align" : "left"
+      },
+      "step" : 139,
+      "oldStep" : 134
+    },
+    "24,1,24,1" : {
+      "style" : {
+        "text-align" : "left",
+        "font-weight" : "bold"
+      },
+      "step" : 146,
+      "oldStep" : 134
+    },
+    "34,3,34,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 152
+    },
+    "23,3,23,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 156
+    },
+    "13,3,13,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 151
+    },
+    "31,2,31,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 138,
+      "oldStep" : 135
+    },
+    "34,2,34,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 142,
+      "oldStep" : 135
+    },
+    "13,2,13,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 140,
+      "oldStep" : 135
+    },
+    "36,1,38,1" : {
+      "style" : {
+        "text-align" : "left",
+        "font-weight" : "bold"
+      },
+      "step" : 145,
+      "oldStep" : 134
+    },
+    "9,3,9,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 148
+    },
+    "3,3,38,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 149
+    },
+    "3,1,38,1" : {
+      "style" : {
+        "text-align" : "left"
+      },
+      "step" : 134
+    },
+    "3,2,38,3" : {
+      "style" : {
+        "text-align" : "right"
+      },
+      "step" : 135
+    }
+  },
+  "displayFormat" : {
+    "3,3,3,3" : {
+      "mask" : "0,000.00",
+      "step" : 65
+    },
+    "31,3,31,3" : {
+      "mask" : "0,000.00",
+      "step" : 62
+    },
+    "20,3,20,3" : {
+      "mask" : "0,000.00",
+      "step" : 67
+    },
+    "10,3,10,3" : {
+      "mask" : "0,000.00",
+      "step" : 66
+    },
+    "34,3,34,3" : {
+      "mask" : "0,000.00",
+      "step" : 64
+    },
+    "23,3,23,3" : {
+      "mask" : "0,000.00",
+      "step" : 68
+    },
+    "13,3,13,3" : {
+      "mask" : "0,000.00",
+      "step" : 63
+    },
+    "31,2,31,3" : {
+      "mask" : "0,000.00",
+      "step" : 57
+    },
+    "34,2,34,3" : {
+      "mask" : "0,000.00",
+      "step" : 59
+    },
+    "13,2,13,3" : {
+      "mask" : "0,000.00",
+      "step" : 58
+    },
+    "9,3,9,3" : {
+      "mask" : "0,000.00",
+      "step" : 60
+    },
+    "3,3,38,3" : {
+      "mask" : "0,000.00",
+      "step" : 61
+    },
+    "3,2,38,3" : {
+      "mask" : "0,000.00",
+      "step" : 56
+    }
+  }
+}
