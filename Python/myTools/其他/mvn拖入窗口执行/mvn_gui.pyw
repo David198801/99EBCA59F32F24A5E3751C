@@ -86,7 +86,7 @@ class CommandDropGroup:
         self.log(f"[{self.frame['text']}] 即将执行: {full_cmd}")
 
         try:
-            launch_cmd = f'start "" cmd /k "{full_cmd}"'
+            launch_cmd = f'start /min "" cmd /k "{full_cmd}"'
             self.log(f"[{self.frame['text']}] 启动命令: {launch_cmd}")
 
             subprocess.Popen(launch_cmd, shell=True)
