@@ -113,19 +113,22 @@ def convert_lrc_to_subs(lrc_path: str) -> pysubs2.SSAFile:
     if not lrc_obj:
         return subs
 
-    # pylrc 返回的列表已按时间排序，可直接迭代
     lines = list(lrc_obj)
+
     for i, line in enumerate(lines):
         start = lrc_timestamp_to_ms(line)
         text = getattr(line, "text", "") or ""
 
-        if i < len(lines) - 1:
-            end = lrc_timestamp_to_ms(lines[i + 1])
-        else:
-            end = start + 3000
+        # 找下一个不同时间戳的行作为结束时间
+        end = start + 3000  # 默认持续 3 秒
+        for j in range(i + 1, len(lines)):
+            next_start = lrc_timestamp_to_ms(lines[j])
+            if next_start > start:
+                end = next_start
+                break
 
         if end <= start:
-            end = start + 2000
+            end = start + 1000
 
         subs.append(pysubs2.SSAEvent(start=start, end=end, text=text))
 
