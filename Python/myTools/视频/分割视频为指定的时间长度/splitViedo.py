@@ -6,14 +6,14 @@ import subprocess
 # =========================
 # 硬编码输入输出路径
 # =========================
-INPUT_FILE = r"D:\Downloads\bili\格局.mp4"
+INPUT_FILE = r"F:\temp\video_20260621_234625298.mp4"
 OUTPUT_DIR = r"segments"
-SEGMENT_SECONDS = 10
+SEGMENT_SECONDS = 60*60
 
 # 是否关闭音频：
 # False = 保留音频（默认）
 # True  = 不输出音频
-DISABLE_AUDIO = True
+DISABLE_AUDIO = False
 
 
 def run_cmd(cmd):
